@@ -16,14 +16,15 @@ public class Item : ScriptableObject {
     [Header("Only UI")]
     public bool stackable = true;
     public bool sellable = false;
-
-    [HideInInspector]
     public int price;
 
     [Header("both")]
     public Sprite image;
 
     public int Item_Id;
+
+    [Header("Seed Specific")]
+    public PlantData plantdata;
 }
 
 public enum ItemType

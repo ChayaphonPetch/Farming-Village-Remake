@@ -22,7 +22,6 @@ public class UIManager : MonoBehaviour
     public Slider StaminaSlider;
 
     private WorldTimeManager worldtimeManager;
-    private PlayerStats playerStats;
 
     void Start()
     {
@@ -32,17 +31,6 @@ public class UIManager : MonoBehaviour
         {
             Debug.LogError("TimeManager not found in the scene.");  
         }
-
-        if (playerStats == null)
-        {
-            playerStats = FindObjectOfType<PlayerStats>();
-        }
-
-        if (playerStats == null)
-        {
-            Debug.LogError("PlayerStats not found in the scene.");
-        }
-
     }
 
     void Update()
@@ -56,9 +44,8 @@ public class UIManager : MonoBehaviour
     void UpdateTimeDisplay()
     {
         string formattedMinutes = worldtimeManager.minutes < 10 ? "0" + worldtimeManager.minutes : worldtimeManager.minutes.ToString();
-        string period = worldtimeManager.isAM ? "AM" : "PM";
 
-        TimeText.text = $"{worldtimeManager.hours} : {formattedMinutes} {period}";
+        TimeText.text = $"{worldtimeManager.hours} : {formattedMinutes}";
         DayText.text = $"Day {worldtimeManager.day}";
         SeasonText.text = worldtimeManager.Seasons;
         WeatherText.text = worldtimeManager.Weathers;

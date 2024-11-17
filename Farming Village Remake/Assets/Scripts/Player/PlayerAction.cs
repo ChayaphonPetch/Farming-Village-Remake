@@ -52,15 +52,25 @@ public class PlayerAction : MonoBehaviour
 
     void Update()
     {
+        // Handle left click for plowing
         if (LeftClick.action.IsPressed())
-        {
-            _ItemManager.doPlowing();
+        {   
+            _ItemManager.PerformAction(ActionType.Plowing);
         }
+
+        // Handle 'E' key for different actions in sequence
         if (Input.GetKeyDown(KeyCode.E))
         {
-            _ItemManager.doPlowing();
-            _ItemManager.destoryPlowing();
-            _ItemManager.wateringPlowing();
+            // Perform all actions in sequence
+            _ItemManager.PerformAction(ActionType.Plowing);
+            _ItemManager.PerformAction(ActionType.Digging);
+            _ItemManager.PerformAction(ActionType.Watering);
+            _ItemManager.SowSeed();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            // Perform all actions in sequence
+            _ItemManager.SowSeed();
         }
     }
 
@@ -88,7 +98,7 @@ public class PlayerAction : MonoBehaviour
         // Ensure you are not interacting with UI
         if (!EventSystem.current.IsPointerOverGameObject())
         {
-            _ItemManager.doPlowing();
+            _ItemManager.PerformAction(ActionType.Plowing);
         }
     }
 }

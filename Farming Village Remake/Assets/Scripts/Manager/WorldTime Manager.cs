@@ -8,7 +8,6 @@ public class WorldTimeManager : MonoBehaviour
     public int day;
     public int hours;
     public int minutes;
-    public bool isAM;
     public float timer;
     public string Seasons;
     public string Weathers;
@@ -16,6 +15,8 @@ public class WorldTimeManager : MonoBehaviour
     public VisualEffect[] Weathers_Effect;
 
     public DayNightData[] ResetTimeData;
+
+    public PlantGrowingManager PlantGrowingManager;
 
     void Awake()
     {
@@ -25,12 +26,11 @@ public class WorldTimeManager : MonoBehaviour
             day = firstData.day;
             hours = firstData.hours;
             minutes = firstData.minutes;
-            isAM = firstData.isAM;
             Seasons = firstData.Seasons.ToString();
             Weathers = firstData.Weathers.ToString();
 
-            Debug.Log($"Day: {firstData.day}, Hours: {firstData.hours}, Minutes: {firstData.minutes}, AM/PM: {(firstData.isAM ? "AM" : "PM")}");
-            Debug.Log($"Current Season: {firstData.Seasons}, Current Weather: {firstData.Weathers}");
+            //Debug.Log($"Day: {firstData.day}, Hours: {firstData.hours}, Minutes: {firstData.minutes}");
+            //Debug.Log($"Current Season: {firstData.Seasons}, Current Weather: {firstData.Weathers}");
         }
     }
 
@@ -53,17 +53,9 @@ public class WorldTimeManager : MonoBehaviour
             minutes = 0;
             hours++;
 
-            if (hours == 12)
+            if (hours >= 24)
             {
-                isAM = !isAM;
-            }
-            else if (hours > 12)
-            {
-                hours = 1;
-            }
-
-            if (isAM && hours == 12)
-            {
+                hours = 0;
                 day++;
 
                 if (day > 31)
@@ -71,29 +63,30 @@ public class WorldTimeManager : MonoBehaviour
                     day = 1;
                     ChangeSeason();
                 }
+                PlantGrowingManager.OnDayPassed();
+                ChangeWeather();
             }
-            ChangeWeather();
         }
 
-        Debug.Log($"Day: {day}, Hours: {hours}, Minutes: {minutes}, AM/PM: {(isAM ? "AM" : "PM")}");
+        //Debug.Log($"Day: {day}, Hours: {hours}, Minutes: {minutes}");
     }
 
     void ChangeSeason()
     {
         Seasons = Seasons == "Summer" ? "Winter" : "Summer";
-        Debug.Log($"Season changed to: {Seasons}");
+        //Debug.Log($"Season changed to: {Seasons}");
     }
 
     void ChangeWeather()
     {
-        int randomValue = Random.Range(1, 101);
+        int randomWeather = Random.Range(1, 101);
         if (Seasons == "Summer")
         {
-            if (randomValue <= 75)
+            if (randomWeather <= 75)
             {
                 Weathers = "Clear";
             }
-            else if (randomValue <= 90)
+            else if (randomWeather <= 90)
             {
                 Weathers = "Foggy";
             }
@@ -104,11 +97,11 @@ public class WorldTimeManager : MonoBehaviour
         }
         else if (Seasons == "Winter")
         {
-            if (randomValue <= 75)
+            if (randomWeather <= 75)
             {
                 Weathers = "Clear";
             }
-            else if (randomValue <= 90)
+            else if (randomWeather <= 90)
             {
                 Weathers = "Foggy";
             }
@@ -119,7 +112,7 @@ public class WorldTimeManager : MonoBehaviour
         }
 
         UpdateWeatherEffects();
-        Debug.Log($"Weather changed to: {Weathers}");
+        //Debug.Log($"Weather changed to: {Weathers}");
 
     }
 

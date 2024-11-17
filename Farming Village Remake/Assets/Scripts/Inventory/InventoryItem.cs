@@ -12,6 +12,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Image image;
     public Text CountText;
 
+    public ItemTip itemTip;  // Reference to the ItemTip script
     [HideInInspector] public Item item;
     [HideInInspector] public int count = 1;
     [HideInInspector] public Transform parentAfterDrag;
@@ -50,5 +51,22 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         CountText.raycastTarget = true;
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (itemTip != null && item != null)
+        {
+            itemTip.ShowItemTip(item);
+        }
+    }
+
+    // When the pointer exits the item
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (itemTip != null)
+        {
+            itemTip.HideItemTip();
+        }
     }
 }

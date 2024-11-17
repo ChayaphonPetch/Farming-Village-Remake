@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -7,7 +7,10 @@ public class DayNightCycle : MonoBehaviour
 {
     private WorldTimeManager worldtimeManager;
     [SerializeField] private Light2D _light;
-    [SerializeField] private Gradient _gradient; 
+    [Header("Summer Light")]
+    [SerializeField] private Gradient summer_gradient;
+    [Header("Winter Light")]
+    [SerializeField] private Gradient winter_gradient;
 
     void Start()
     {
@@ -42,7 +45,7 @@ public class DayNightCycle : MonoBehaviour
     {
         float normalizedTime = GetNormalizedTimeOfDay();
 
-        _light.color = _gradient.Evaluate(normalizedTime);
+        _light.color = summer_gradient.Evaluate(normalizedTime);
 
         _light.intensity = GetIntensityBasedOnTime(normalizedTime);
     }
