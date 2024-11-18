@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Money Text")]
     public TextMeshProUGUI CoinText;
+    public TextMeshProUGUI ShopCoinText;
 
     [Header("Sprite")]
     public Image DayNight_Icon;
@@ -69,6 +70,7 @@ public class UIManager : MonoBehaviour
     void UpdateMoneyDisplay()
     {
         CoinText.text = $"{ playerData.current_money}";
+        ShopCoinText.text = $"{playerData.current_money}";
     }
 
     void UpdateStarminaDisplay()
