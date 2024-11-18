@@ -76,7 +76,7 @@ public class PlantGrowingManager : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange && currentStageIndex == plantData.GrowthStages.Count - 1 && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             HarvestPlant();
         }
@@ -87,12 +87,15 @@ public class PlantGrowingManager : MonoBehaviour
         spriteRenderer.material.SetFloat("_OutlineEnabled", enable ? 1f : 0f);
     }
 
-    void HarvestPlant()
+    public void HarvestPlant()
     {
-        Debug.Log("Plant harvested!" + plantData.Product);
-        AddProduct();
-        Destroy(gameObject);
-        _tileManager.HandleRemovingTile();
+        if (playerInRange && currentStageIndex == plantData.GrowthStages.Count - 1)
+        {
+            Debug.Log("Plant harvested!" + plantData.Product);
+            AddProduct();
+            Destroy(gameObject);
+            _tileManager.HandleRemovingTile();
+        }
     }
 
     void AddProduct()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using TMPro.Examples;
 
 public class PlayerAction : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class PlayerAction : MonoBehaviour
     private ItemManager _ItemManager;
 
     [SerializeField] private GameObject _inventory;
+    [SerializeField] private GameObject _sellstorage;
+    [SerializeField] private GameObject _player;
+
+    public bool isNearSellStorage = false;
 
     public InputActionReference inventoryKey;
     public InputActionReference move;
@@ -31,6 +36,7 @@ public class PlayerAction : MonoBehaviour
         {
             _ItemManager = FindObjectOfType<ItemManager>();
         }
+
     }
     private void OnEnable()
     {
@@ -50,8 +56,14 @@ public class PlayerAction : MonoBehaviour
             LeftClick.action.performed -= HandleLeftClick;
     }
 
-    void Update()
+    void Update()   
     {
+
+        if (_ItemManager == null)
+        {
+
+        }
+
         if (LeftClick.action.IsPressed())
         {   
             _ItemManager.PerformAction(ActionType.Plowing);
@@ -69,10 +81,14 @@ public class PlayerAction : MonoBehaviour
         {
             _ItemManager.SowingSeed();
         }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ToggleSellStorage();
+        }
     }
 
     private void ToggleInventory(InputAction.CallbackContext context)
-    {
+    {   
         if (_inventory != null)
             _inventory.SetActive(!_inventory.activeSelf);
 
@@ -90,11 +106,52 @@ public class PlayerAction : MonoBehaviour
         }
     }
 
+    private void ToggleSellStorage()
+    {
+        if (_sellstorage != null && isNearSellStorage == true)
+        {
+            _sellstorage.SetActive(!_sellstorage.activeSelf);
+
+            if (_sellstorage.activeSelf)
+            {
+                move.action.Disable();
+                Sprint.action.Disable();
+                LeftClick.action.Disable();
+            }
+            else
+            {
+                move.action.Enable();
+                Sprint.action.Enable();
+                LeftClick.action.Enable();
+            }
+        }
+        else
+        {
+            Debug.Log("Sell storage is null or player is not near sell storage.");
+        }
+    }
+
+
     private void HandleLeftClick(InputAction.CallbackContext context)
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             _ItemManager.PerformAction(ActionType.Plowing);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Sell Storage"))
+        {
+            isNearSellStorage = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Sell Storage"))
+        {
+            isNearSellStorage = false;
         }
     }
 }

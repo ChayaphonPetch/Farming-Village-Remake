@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2068b3089ac0bc49aeb3d89597ea041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tileManager: {fileID: 0}
   inventoryManager: {fileID: 0}
   plantData: {fileID: 11400000, guid: 0ada17f396c4307489cffe6661ed1bfa, type: 2}
 --- !u!61 &3523157342285805815
@@ -135,7 +136,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.1}
     oldSize: {x: 1, y: 0.6875}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5

@@ -16,6 +16,8 @@ public class WorldTimeManager : MonoBehaviour
 
     public DayNightData[] ResetTimeData;
 
+    public SellStorageManager _sellStorageManager;
+
     void Awake()
     {
         if (ResetTimeData != null && ResetTimeData.Length > 0)

@@ -18,18 +18,25 @@ public class UIManager : MonoBehaviour
     [Header("Sprite")]
     public Image DayNight_Icon;
 
-    [Header("Starina")]
+    [Header("Stamina")]
     public Slider StaminaSlider;
+    public TextMeshProUGUI StaminaText;
 
     private WorldTimeManager worldtimeManager;
+    private PlayerData playerData;
 
     void Start()
     {
         worldtimeManager = FindObjectOfType<WorldTimeManager>();
+        playerData = FindObjectOfType<PlayerData>();
 
         if (worldtimeManager == null)
         {
             Debug.LogError("TimeManager not found in the scene.");  
+        }
+        if (playerData == null)
+        {
+            Debug.LogError("TimeManager not found in the scene.");
         }
     }
 
@@ -39,6 +46,12 @@ public class UIManager : MonoBehaviour
         {
             UpdateTimeDisplay();
         }
+
+        if (playerData != null)
+        {
+            UpdateMoneyDisplay();
+        }
+        UpdateStarminaDisplay();
     }
 
     void UpdateTimeDisplay()
@@ -51,6 +64,17 @@ public class UIManager : MonoBehaviour
         WeatherText.text = worldtimeManager.Weathers;
         //DayNight_Icon.Image = worldtimeManager.DayNight_Icon;   
 
+    }
+
+    void UpdateMoneyDisplay()
+    {
+        CoinText.text = $"{ playerData.current_money}";
+    }
+
+    void UpdateStarminaDisplay()
+    {
+        StaminaSlider.value = playerData.current_stamina;
+        StaminaText.text = $"{playerData.current_stamina}";
     }
 
 }
