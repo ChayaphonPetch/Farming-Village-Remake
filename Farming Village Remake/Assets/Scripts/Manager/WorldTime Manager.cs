@@ -15,8 +15,7 @@ public class WorldTimeManager : MonoBehaviour
     public VisualEffect[] Weathers_Effect;
 
     public DayNightData[] ResetTimeData;
-
-    public SellStorageManager _sellStorageManager;
+    public TileManager _tilemanager;
 
     void Awake()
     {
@@ -69,7 +68,7 @@ public class WorldTimeManager : MonoBehaviour
                 {
                     plantManager.OnDayPassed();
                 }
-
+                _tilemanager.ConvertAllWetSoiltoSoil();
                 ChangeWeather();
             }
         }

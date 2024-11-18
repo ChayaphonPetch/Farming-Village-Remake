@@ -6,11 +6,11 @@ using UnityEngine.Tilemaps;
 public class TileManager : MonoBehaviour
 {
     [SerializeField] private GameObject Player;
-    [SerializeField] private Tilemap interactableMap;
-    [SerializeField] private Tilemap PlowingMap;
+    [SerializeField] public Tilemap interactableMap;
+    [SerializeField] public Tilemap PlowingMap;
 
-    [SerializeField] private Tile Plowing_Soil;
-    [SerializeField] private Tile WetPlowing_Soil;
+    [SerializeField] public Tile Plowing_Soil;
+    [SerializeField] public Tile WetPlowing_Soil;
 
     public GameObject PlantPrefab;
 
@@ -111,7 +111,6 @@ public class TileManager : MonoBehaviour
            // Debug.Log("Player Position: " + playerPosition);
             //Debug.Log("Cell Position: " + cellPosition);
 
-            // Ensure we're getting the tile from the correct map
             TileBase currentTile = PlowingMap.GetTile(cellPosition);
 
             if (currentTile != null)
@@ -145,7 +144,6 @@ public class TileManager : MonoBehaviour
             {
                 Vector3 spawnPosition = PlowingMap.GetCellCenterWorld(cellPosition);
 
-                // Check if there is already a plant at the spawn position
                 Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPosition, 0.1f);
                 bool plantExists = false;
 
@@ -172,6 +170,25 @@ public class TileManager : MonoBehaviour
             {
                 inventoryManager.GetSelectedItem(false);
             }
+        }
+    }
+
+    public void ConvertAllWetSoiltoSoil()
+    {
+        if (PlowingMap != null)
+        {
+            BoundsInt bounds = PlowingMap.cellBounds;
+
+            foreach (Vector3Int position in bounds.allPositionsWithin)
+            {
+                TileBase tile = PlowingMap.GetTile(position);
+                if (tile == WetPlowing_Soil)
+                {
+                    PlowingMap.SetTile(position, Plowing_Soil);
+                }
+            }
+
+            //Debug.Log("All WetPlowing_Soil tiles have been converted to Plowing_Soil.");
         }
     }
 

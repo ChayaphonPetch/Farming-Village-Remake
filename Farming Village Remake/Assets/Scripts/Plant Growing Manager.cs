@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlantGrowingManager : MonoBehaviour
 {
@@ -12,25 +13,36 @@ public class PlantGrowingManager : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private bool playerInRange = false;
+    private Vector3Int plantCellPosition;
 
     void Start()
     {
-        if (inventoryManager == null)
+        if (_tileManager == null)
         {
             _tileManager = FindObjectOfType<TileManager>();
         }
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (inventoryManager == null)
         {
             inventoryManager = FindObjectOfType<InventoryManager>();
         }
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        Tilemap plowingMap = _tileManager.PlowingMap;
+        plantCellPosition = plowingMap.WorldToCell(transform.position);
         UpdatePlantStage();
     }
 
     public void GrowPlant()
     {
+        TileBase currentTile = _tileManager.PlowingMap.GetTile(plantCellPosition);
+        if (currentTile != _tileManager.WetPlowing_Soil)
+        {
+            Debug.Log("Plant cannot grow. Tile is not WetPlowing_Soil.");
+            return;
+        }
+
         currentGrowthDay++;
 
         if (currentGrowthDay >= plantData.dayGrowing * (currentStageIndex + 1) && currentStageIndex < plantData.GrowthStages.Count - 1)
@@ -56,6 +68,7 @@ public class PlantGrowingManager : MonoBehaviour
     {
         GrowPlant();
     }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && currentStageIndex == plantData.GrowthStages.Count - 1)
@@ -76,7 +89,7 @@ public class PlantGrowingManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
             HarvestPlant();
         }
@@ -91,7 +104,7 @@ public class PlantGrowingManager : MonoBehaviour
     {
         if (playerInRange && currentStageIndex == plantData.GrowthStages.Count - 1)
         {
-            Debug.Log("Plant harvested!" + plantData.Product);
+            Debug.Log("Plant harvested! Product: " + plantData.Product);
             AddProduct();
             Destroy(gameObject);
             _tileManager.HandleRemovingTile();
@@ -102,7 +115,7 @@ public class PlantGrowingManager : MonoBehaviour
     {
         bool result = inventoryManager.AddItem(plantData.Product);
 
-        if (result == true)
+        if (result)
         {
             Debug.Log("Item Added: " + plantData.Product);
         }
