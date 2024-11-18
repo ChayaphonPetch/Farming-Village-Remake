@@ -23,7 +23,7 @@ public class SpawnItem : MonoBehaviour
 
     public void RandomItem()
     {
-        int id = Random.Range(0, itemsToPickup.Length);
+        int id = Random.Range(3, itemsToPickup.Length);
 
         bool result = inventoryManager.AddItem(itemsToPickup[id]);
         if (result)

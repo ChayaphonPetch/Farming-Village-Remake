@@ -45,8 +45,9 @@ public class DayNightCycle : MonoBehaviour
     {
         float normalizedTime = GetNormalizedTimeOfDay();
 
-        _light.color = summer_gradient.Evaluate(normalizedTime);
+        Gradient currentGradient = worldtimeManager.Seasons == "Summer" ? summer_gradient : winter_gradient;
 
+        _light.color = currentGradient.Evaluate(normalizedTime);
         _light.intensity = GetIntensityBasedOnTime(normalizedTime);
     }
 

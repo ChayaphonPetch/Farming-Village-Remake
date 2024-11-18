@@ -6,7 +6,6 @@ public class ItemManager : MonoBehaviour
 {
     private TileManager _tileManager;
     public GameObject PlantPrefab;
-    public Transform plantSpawnPoint;
 
     public InventoryManager inventoryManager;
     public Item[] itemsTools;
@@ -31,7 +30,7 @@ public class ItemManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Selected item is not suitable for the action or no item selected.");
+            //Debug.Log("Selected item is not suitable for the action or no item selected.");
         }
     }
 
@@ -54,37 +53,27 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    public void SowSeed()
+    public void SowingSeed()
     {
         Item receivedItem = inventoryManager.GetSelectedItem(false);
+        PlantGrowingManager plantManager = PlantPrefab.GetComponent<PlantGrowingManager>();
         if (IsValidItem(receivedItem, ItemType.Seed, ActionType.Plant))
         {
-            inventoryManager.GetSelectedItem(true);
-            Debug.Log("Used Item: " + receivedItem.name);
-
-            if (PlantPrefab != null && plantSpawnPoint != null)
+            Debug.Log(receivedItem.name);
+            if (receivedItem.plantdata != null)
             {
-                GameObject newPlant = Instantiate(PlantPrefab, plantSpawnPoint.position, Quaternion.identity);
-                PlantGrowingManager plantManager = newPlant.GetComponent<PlantGrowingManager>();
-
-                if (plantManager != null && receivedItem.plantdata != null)
-                {
-                    plantManager.plantData = receivedItem.plantdata;
-                    Debug.Log("Seed prefab planted successfully with data: " + receivedItem.plantdata.name);
-                }
-                else
-                {
-                    Debug.LogWarning("PlantGrowingManager or PlantData is missing on the prefab.");
-                }
+                plantManager.plantData = receivedItem.plantdata;
+                _tileManager.SpawnPlantinTiles(plantManager.gameObject);
+                Debug.Log("Used Item: " + receivedItem.name);
             }
             else
             {
-                Debug.LogWarning("Seed prefab or plantSpawnPoint is not assigned.");
+                //Debug.LogWarning("PlantData is missing for the selected item.");
             }
         }
         else
         {
-            Debug.Log("Selected item is not suitable for sowing or no item selected.");
+            //Debug.Log("Selected item is not suitable for sowing or no item selected.");
         }
     }
 }

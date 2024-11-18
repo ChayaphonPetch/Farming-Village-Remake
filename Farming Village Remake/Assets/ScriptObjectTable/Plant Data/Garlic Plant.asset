@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e11483ec52f8c94ab9c17084c25d5e6, type: 3}
+  m_Name: Garlic Plant
+  m_EditorClassIdentifier: 
+  Name: Garlic
+  dayGrowing: 2
+  Season: 0
+  GrowthStages:
+  - {fileID: -513956009, guid: b1980fc6a2b311247acb9e33a6944aad, type: 3}
+  - {fileID: 1552703291, guid: b1980fc6a2b311247acb9e33a6944aad, type: 3}
+  - {fileID: -503995394, guid: b1980fc6a2b311247acb9e33a6944aad, type: 3}
+  - {fileID: -105952560, guid: b1980fc6a2b311247acb9e33a6944aad, type: 3}
+  Product: {fileID: 11400000, guid: 21eb7282883eed14cbf501e8c745c09d, type: 2}

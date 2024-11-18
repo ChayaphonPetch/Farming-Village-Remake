@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e11483ec52f8c94ab9c17084c25d5e6, type: 3}
   m_Name: Corn Plant
   m_EditorClassIdentifier: 
-  Name: 
-  dayGrowing: 0
-  Season: 0
-  GrowthStages: []
-  Product: {fileID: 0}
+  Name: Corn
+  dayGrowing: 1
+  Season: 1
+  GrowthStages:
+  - {fileID: -673055474, guid: 8184b7ac845991448b507864f347bffe, type: 3}
+  - {fileID: 1399084113, guid: 8184b7ac845991448b507864f347bffe, type: 3}
+  - {fileID: 750033712, guid: 8184b7ac845991448b507864f347bffe, type: 3}
+  - {fileID: -392831269, guid: 8184b7ac845991448b507864f347bffe, type: 3}
+  Product: {fileID: 11400000, guid: 490f7e40dea0b57488350cc4ca8c1944, type: 2}

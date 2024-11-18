@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlantGrowingManager : MonoBehaviour
 {
+    public TileManager _tileManager;
     public InventoryManager inventoryManager;
     public PlantData plantData;
     private int currentGrowthDay = 0;
@@ -14,6 +15,11 @@ public class PlantGrowingManager : MonoBehaviour
 
     void Start()
     {
+        if (inventoryManager == null)
+        {
+            _tileManager = FindObjectOfType<TileManager>();
+        }
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (inventoryManager == null)
@@ -78,14 +84,7 @@ public class PlantGrowingManager : MonoBehaviour
 
     void HighlightSprite(bool enable)
     {
-        if (enable)
-        {
-            spriteRenderer.material.SetFloat("_OutlineEnabled", 1f);
-        }
-        else
-        {
-            spriteRenderer.material.SetFloat("_OutlineEnabled", 0f);
-        }
+        spriteRenderer.material.SetFloat("_OutlineEnabled", enable ? 1f : 0f);
     }
 
     void HarvestPlant()
@@ -93,6 +92,7 @@ public class PlantGrowingManager : MonoBehaviour
         Debug.Log("Plant harvested!" + plantData.Product);
         AddProduct();
         Destroy(gameObject);
+        _tileManager.HandleRemovingTile();
     }
 
     void AddProduct()

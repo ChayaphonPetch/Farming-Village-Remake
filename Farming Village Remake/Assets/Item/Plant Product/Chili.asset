@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Chili
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
-  type: 0
+  type: 3
   actionType: 0
   range: {x: 5, y: 4}
   stackable: 1
-  sellable: 0
-  price: 0
-  image: {fileID: 0}
+  sellable: 1
+  price: 25
+  image: {fileID: -1295189871, guid: 5f734cb05635b9f4391cb30f05a00574, type: 3}
   Item_Id: 0
+  plantdata: {fileID: 11400000, guid: 0ada17f396c4307489cffe6661ed1bfa, type: 2}

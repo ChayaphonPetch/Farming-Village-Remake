@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e11483ec52f8c94ab9c17084c25d5e6, type: 3}
   m_Name: Chili Plant
   m_EditorClassIdentifier: 
-  Name: 
-  dayGrowing: 0
-  Season: 
-  Stage0: {fileID: 0}
-  Stage1: {fileID: 0}
-  Stage2: {fileID: 0}
-  Stage3: {fileID: 0}
+  Name: Chili
+  dayGrowing: 2
+  Season: 1
+  GrowthStages:
+  - {fileID: -879130387, guid: 5f734cb05635b9f4391cb30f05a00574, type: 3}
+  - {fileID: -1145750488, guid: 5f734cb05635b9f4391cb30f05a00574, type: 3}
+  - {fileID: 1747187579, guid: 5f734cb05635b9f4391cb30f05a00574, type: 3}
+  - {fileID: 504837736, guid: 5f734cb05635b9f4391cb30f05a00574, type: 3}
+  Product: {fileID: 11400000, guid: f0c8681e163a4df4f856be0476f3a923, type: 2}

@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     public VisualEffect VFX_FoggyCollider;
+    public VisualEffect VFX_RainCollider;
+     public VisualEffect VFX_SnowCollider;
 
     public float moveSpeed_Walk = 5;
     public float moveSpeed_Sprint = 10;
@@ -54,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         VFX_FoggyCollider.SetVector3("Collider Position", transform.position);
+        VFX_SnowCollider.SetVector3("Collider Position", transform.position);
     }
 
     private void FixedUpdate()

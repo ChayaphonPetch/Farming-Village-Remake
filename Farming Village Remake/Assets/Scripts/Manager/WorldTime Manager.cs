@@ -16,8 +16,6 @@ public class WorldTimeManager : MonoBehaviour
 
     public DayNightData[] ResetTimeData;
 
-    public PlantGrowingManager PlantGrowingManager;
-
     void Awake()
     {
         if (ResetTimeData != null && ResetTimeData.Length > 0)
@@ -63,7 +61,13 @@ public class WorldTimeManager : MonoBehaviour
                     day = 1;
                     ChangeSeason();
                 }
-                PlantGrowingManager.OnDayPassed();
+
+                PlantGrowingManager[] allPlantManagers = FindObjectsOfType<PlantGrowingManager>();
+                foreach (var plantManager in allPlantManagers)
+                {
+                    plantManager.OnDayPassed();
+                }
+
                 ChangeWeather();
             }
         }
@@ -118,7 +122,6 @@ public class WorldTimeManager : MonoBehaviour
 
     void UpdateWeatherEffects()
     {
-        // Disable all weather effects first
         foreach (var effect in Weathers_Effect)
         {
             if (effect != null)
@@ -127,7 +130,6 @@ public class WorldTimeManager : MonoBehaviour
             }
         }
 
-        // Activate the correct weather effect based on the current weather
         switch (Weathers)
         {
             case "Foggy":
@@ -142,14 +144,27 @@ public class WorldTimeManager : MonoBehaviour
                     Weathers_Effect[1].gameObject.SetActive(true);
                 }
                 break;
-            /*case "Snow Storm":
-                if (Weathers_Effect.Length > 2 && Weathers_Effect[2] != null)
+            case "Snow Storm":
+                if (Weathers_Effect.Length > 3 && Weathers_Effect[3] != null)
                 {
-                    Weathers_Effect[2].gameObject.SetActive(true);
+                    // Activate the Snow Storm effect
+                    Weathers_Effect[3].gameObject.SetActive(true);
+
+                    // Deactivate Weathers_Effect[2] if Snow Storm is active
+                    if (Weathers_Effect.Length > 2 && Weathers_Effect[2] != null)
+                    {
+                        Weathers_Effect[2].gameObject.SetActive(false);
+                    }
                 }
-                break*/
-                // Add more cases if you have additional weather effects
-        }   
+                break;
+        }
+        if (Seasons == "Winter")
+        {
+            if (Weathers_Effect.Length > 2 && Weathers_Effect[2] != null)
+            {
+                Weathers_Effect[2].gameObject.SetActive(true);
+            }
+        }
     }
 }
 

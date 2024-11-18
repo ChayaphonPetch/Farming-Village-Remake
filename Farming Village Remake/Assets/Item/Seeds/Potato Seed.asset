@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90e254d109c924b4087475faf37ec084, type: 3}
-  m_Name: Chili Seed
+  m_Name: Potato Seed
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
   type: 2
@@ -19,6 +19,6 @@ MonoBehaviour:
   stackable: 1
   sellable: 1
   price: 10
-  image: {fileID: -273057077, guid: 5f734cb05635b9f4391cb30f05a00574, type: 3}
+  image: {fileID: -355053142, guid: 357aa56f93c06b5408609afe713a8cef, type: 3}
   Item_Id: 0
-  plantdata: {fileID: 11400000, guid: 0ada17f396c4307489cffe6661ed1bfa, type: 2}
+  plantdata: {fileID: 11400000, guid: ff812a3b0229fe0489c4e4ce87ac6263, type: 2}
