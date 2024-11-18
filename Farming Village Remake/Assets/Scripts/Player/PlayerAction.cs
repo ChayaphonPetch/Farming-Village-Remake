@@ -12,9 +12,12 @@ public class PlayerAction : MonoBehaviour
 
     [SerializeField] private GameObject _inventory;
     [SerializeField] private GameObject _sellstorage;
+    [SerializeField] private GameObject _shop;
+    [SerializeField] private GameObject _player_ui;
     [SerializeField] private GameObject _player;
 
     public bool isNearSellStorage = false;
+    public bool isNearShop = false;
 
     public InputActionReference inventoryKey;
     public InputActionReference move;
@@ -84,6 +87,7 @@ public class PlayerAction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             ToggleSellStorage();
+            ToggleShop();
         }
     }
 
@@ -91,6 +95,7 @@ public class PlayerAction : MonoBehaviour
     {   
         if (_inventory != null)
             _inventory.SetActive(!_inventory.activeSelf);
+            _player_ui.SetActive(!_player_ui.activeSelf);
 
         if (_inventory.activeSelf)
         {
@@ -111,23 +116,54 @@ public class PlayerAction : MonoBehaviour
         if (_sellstorage != null && isNearSellStorage == true)
         {
             _sellstorage.SetActive(!_sellstorage.activeSelf);
+            _player_ui.SetActive(!_player_ui.activeSelf);
 
             if (_sellstorage.activeSelf)
             {
                 move.action.Disable();
                 Sprint.action.Disable();
                 LeftClick.action.Disable();
+                inventoryKey.action.Disable();
             }
             else
             {
                 move.action.Enable();
                 Sprint.action.Enable();
                 LeftClick.action.Enable();
+                inventoryKey.action.Enable();
             }
         }
         else
         {
-            Debug.Log("Sell storage is null or player is not near sell storage.");
+            //Debug.Log("Sell storage is null or player is not near sell storage.");
+        }
+    }
+
+    private void ToggleShop()
+    {
+        if (_shop != null && isNearShop == true)
+        {
+            _shop.SetActive(!_shop.activeSelf);
+            _player_ui.SetActive(!_player_ui.activeSelf);
+
+            if (_shop.activeSelf)
+            {
+                move.action.Disable();
+                Sprint.action.Disable();
+                LeftClick.action.Disable();
+                inventoryKey.action.Disable();
+            }
+            else
+            {
+                move.action.Enable();
+                Sprint.action.Enable();
+                LeftClick.action.Enable();
+                inventoryKey.action.Enable();
+            }
+        }
+        else
+        {
+            //Debug.Log("Shop is null or player is not near Shop.");
         }
     }
 
@@ -153,6 +189,15 @@ public class PlayerAction : MonoBehaviour
         {
             isNearSellStorage = false;
         }
+    }
+
+    public void EnableKey()
+    {
+        move.action.Enable();
+        Sprint.action.Enable();
+        LeftClick.action.Enable();
+        inventoryKey.action.Enable();
+        _player_ui.SetActive(!_player_ui.activeSelf);
     }
 }
 

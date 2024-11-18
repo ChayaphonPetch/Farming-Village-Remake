@@ -91,13 +91,14 @@ public class WorldTimeManager : MonoBehaviour
             {
                 Weathers = "Clear";
             }
-            else if (randomWeather <= 90)
+            else if (randomWeather <= 85)
             {
                 Weathers = "Foggy";
             }
             else
             {
                 Weathers = "Rain";
+                _tilemanager.ConvertAllSoiltoWetSoil();
             }
         }
         else if (Seasons == "Winter")
@@ -106,7 +107,7 @@ public class WorldTimeManager : MonoBehaviour
             {
                 Weathers = "Clear";
             }
-            else if (randomWeather <= 90)
+            else if (randomWeather <= 85)
             {
                 Weathers = "Foggy";
             }

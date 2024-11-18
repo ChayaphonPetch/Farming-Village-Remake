@@ -7,6 +7,7 @@ public class PlantGrowingManager : MonoBehaviour
 {
     public TileManager _tileManager;
     public InventoryManager inventoryManager;
+    public WorldTimeManager worldTimeManager;
     public PlantData plantData;
     private int currentGrowthDay = 0;
     private int currentStageIndex = 0;
@@ -25,6 +26,11 @@ public class PlantGrowingManager : MonoBehaviour
         if (inventoryManager == null)
         {
             inventoryManager = FindObjectOfType<InventoryManager>();
+        }
+
+        if (worldTimeManager == null)
+        {
+            worldTimeManager = FindObjectOfType<WorldTimeManager>();
         }
 
         spriteRenderer = GetComponent<SpriteRenderer>();

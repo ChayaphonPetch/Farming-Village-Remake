@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e254d109c924b4087475faf37ec084, type: 3}
   m_Name: Watering Can
   m_EditorClassIdentifier: 
-  tile: {fileID: 0}
+  itemname: Watering Can
   type: 1
   actionType: 3
+  seasonsell: 0
   range: {x: 5, y: 4}
   stackable: 0
   sellable: 0

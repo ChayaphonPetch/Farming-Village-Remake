@@ -192,4 +192,23 @@ public class TileManager : MonoBehaviour
         }
     }
 
+    public void ConvertAllSoiltoWetSoil()
+    {
+        if (PlowingMap != null)
+        {
+            BoundsInt bounds = PlowingMap.cellBounds;
+
+            foreach (Vector3Int position in bounds.allPositionsWithin)
+            {
+                TileBase tile = PlowingMap.GetTile(position);
+                if (tile == Plowing_Soil)
+                {
+                    PlowingMap.SetTile(position, WetPlowing_Soil);
+                }
+            }
+
+            //Debug.Log("All WetPlowing_Soil tiles have been converted to Plowing_Soil.");
+        }
+    }
+
 }

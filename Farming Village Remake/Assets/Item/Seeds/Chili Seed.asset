@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e254d109c924b4087475faf37ec084, type: 3}
   m_Name: Chili Seed
   m_EditorClassIdentifier: 
-  tile: {fileID: 0}
+  itemname: Chili Seed
   type: 2
   actionType: 5
+  seasonsell: 1
   range: {x: 5, y: 4}
   stackable: 1
   sellable: 1

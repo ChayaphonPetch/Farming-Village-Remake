@@ -41,7 +41,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha0 + i) || Input.GetKeyDown(KeyCode.Alpha0 + i))
             {
-                Debug.Log(i - 1);
+                //Debug.Log(i - 1);
                 ChangeSelectedSlot(i - 1);
                 break;
             }

@@ -8,9 +8,10 @@ using UnityEngine.Tilemaps;
 public class Item : ScriptableObject {
 
     [Header("Only Gameplay")]
-    public TileBase tile;
+    public string itemname;
     public ItemType type;
     public ActionType actionType;
+    public SeasonSell seasonsell;
     public Vector2Int range = new Vector2Int(5, 4);
 
     [Header("Only UI")]
@@ -35,6 +36,11 @@ public enum ItemType
 public enum ActionType
 {
     None, Digging, Cutting, Watering, Plowing, Plant
+}
+
+public enum SeasonSell
+{
+    None, Summer, Winter
 }
 
 
