@@ -16,6 +16,7 @@ public class WorldTimeManager : MonoBehaviour
 
     public DayNightData[] ResetTimeData;
     public TileManager _tilemanager;
+    private ShopManager _shopmanager;
 
     void Awake()
     {
@@ -31,6 +32,11 @@ public class WorldTimeManager : MonoBehaviour
             //Debug.Log($"Day: {firstData.day}, Hours: {firstData.hours}, Minutes: {firstData.minutes}");
             //Debug.Log($"Current Season: {firstData.Seasons}, Current Weather: {firstData.Weathers}");
         }
+    }
+
+    void Start()
+    {
+        _shopmanager = FindObjectOfType<ShopManager>();
     }
 
     void Update()
@@ -61,6 +67,7 @@ public class WorldTimeManager : MonoBehaviour
                 {
                     day = 1;
                     ChangeSeason();
+                    _shopmanager.SpawnBuySlots();
                 }
 
                 PlantGrowingManager[] allPlantManagers = FindObjectsOfType<PlantGrowingManager>();

@@ -25,24 +25,41 @@ public class ShopManager : MonoBehaviour
         for (int i = 0; i < buyslots.Length; i++)
         {
             Buyslot slot = buyslots[i];
-            BuySlotItem BuyInSlot = slot.GetComponentInChildren<BuySlotItem>();
-            if (BuyInSlot == null && BuyInSlot.item == item && BuyInSlot.item.seasonsell == worldTimeManager.Seasons)
+            BuySlotItem buyInSlot = slot.GetComponentInChildren<BuySlotItem>();
+
+            if (buyInSlot == null)
             {
-                SpawnBuySlots(item);
+                GameObject newSlot = Instantiate(buyslot, shopslots.transform);
+                newSlot.transform.localScale = Vector3.one;
+
+                BuySlotItem buyslotItem = newSlot.GetComponent<BuySlotItem>();
+                buyslotItem.InitialiseItem(item);
+                return;
             }
         }
     }*/
 
-    void SpawnBuySlots()
+
+    public void SpawnBuySlots()
     {
+        foreach (Transform child in shopslots.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         for (int i = 0; i < itemseeds.Length; i++)
         {
-            GameObject newSlot = Instantiate(buyslot, shopslots.transform);
-            newSlot.transform.localScale = Vector3.one;
+            // Check if the item's valid seasons include the current season
+            if (itemseeds[i].seasonsell.ToString() == worldTimeManager.Seasons)
+            {
+                GameObject newSlot = Instantiate(buyslot, shopslots.transform);
+                newSlot.transform.localScale = Vector3.one;
 
-            BuySlotItem buyslotItem = newSlot.GetComponent<BuySlotItem>();
-            buyslotItem.InitialiseItem(itemseeds[i]);
+                BuySlotItem buyslotItem = newSlot.GetComponent<BuySlotItem>();
+                buyslotItem.InitialiseItem(itemseeds[i]);
+            }
         }
     }
+
 
 }

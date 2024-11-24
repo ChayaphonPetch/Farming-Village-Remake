@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
     private TileManager _tileManager;
+    private PlayerData _playerdata;
     public GameObject PlantPrefab;
 
     public InventoryManager inventoryManager;
@@ -14,6 +15,7 @@ public class ItemManager : MonoBehaviour
     void Start()
     {
         _tileManager = _tileManager ?? FindObjectOfType<TileManager>();
+        _playerdata = _playerdata ?? FindObjectOfType<PlayerData>();
     }
 
     private bool IsValidItem(Item item, ItemType type, ActionType action)
@@ -40,14 +42,17 @@ public class ItemManager : MonoBehaviour
         {
             case ActionType.Plowing:
                 _tileManager.HandlePlowingTile();
+                //_playerdata.current_stamina -= 2;
                 Debug.Log("Plowing by: " + receivedItem.name);
                 break;
             case ActionType.Watering:
                 _tileManager.HandleWateringTile();
+                //_playerdata.current_stamina -= 2;
                 Debug.Log("Watering by: " + receivedItem.name);
                 break;
             case ActionType.Digging:
                 _tileManager.HandleRemovingTile();
+                //_playerdata.current_stamina -= 2;
                 Debug.Log("Removing by: " + receivedItem.name);
                 break;
         }
@@ -64,6 +69,7 @@ public class ItemManager : MonoBehaviour
             {
                 plantManager.plantData = receivedItem.plantdata;
                 _tileManager.SpawnPlantinTiles(plantManager.gameObject);
+               //_playerdata.current_stamina -= 1;
                 Debug.Log("Used Item: " + receivedItem.name);
             }
             else

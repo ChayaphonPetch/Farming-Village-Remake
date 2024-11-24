@@ -12,11 +12,13 @@ public class PlayerAction : MonoBehaviour
 
     [SerializeField] private GameObject _inventory;
     [SerializeField] private GameObject _sellstorage;
+    [SerializeField] private GameObject _storage;
     [SerializeField] private GameObject _shop;
     [SerializeField] private GameObject _player_ui;
     [SerializeField] private GameObject _player;
 
     public bool isNearSellStorage = false;
+    public bool isNearStorage = false;
     public bool isNearShop = false;
 
     public InputActionReference inventoryKey;
@@ -87,6 +89,7 @@ public class PlayerAction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             ToggleSellStorage();
+            ToggleStorage();
             ToggleShop();
         }
     }
@@ -119,6 +122,34 @@ public class PlayerAction : MonoBehaviour
             _player_ui.SetActive(!_player_ui.activeSelf);
 
             if (_sellstorage.activeSelf)
+            {
+                move.action.Disable();
+                Sprint.action.Disable();
+                LeftClick.action.Disable();
+                inventoryKey.action.Disable();
+            }
+            else
+            {
+                move.action.Enable();
+                Sprint.action.Enable();
+                LeftClick.action.Enable();
+                inventoryKey.action.Enable();
+            }
+        }
+        else
+        {
+            //Debug.Log("Sell storage is null or player is not near sell storage.");
+        }
+    }
+
+    private void ToggleStorage()
+    {
+        if (_storage != null && isNearStorage == true)
+        {
+            _storage.SetActive(!_storage.activeSelf);
+            _player_ui.SetActive(!_player_ui.activeSelf);
+
+            if (_storage.activeSelf)
             {
                 move.action.Disable();
                 Sprint.action.Disable();

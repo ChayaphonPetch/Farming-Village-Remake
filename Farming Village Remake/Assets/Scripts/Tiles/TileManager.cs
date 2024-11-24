@@ -17,6 +17,7 @@ public class TileManager : MonoBehaviour
     private Collider2D playerCollider;
 
     public InventoryManager inventoryManager;
+    private PlayerData _playerdata;
     void Start()
     {
         //HideAllTiles();
@@ -28,6 +29,8 @@ public class TileManager : MonoBehaviour
                 //Debug.LogError("Player object does not have a Collider component attached.");
             }
         }
+
+        _playerdata = _playerdata ?? FindObjectOfType<PlayerData>();
     }
 
     public void HideAllTiles()
@@ -65,6 +68,7 @@ public class TileManager : MonoBehaviour
                 if (currentTile != Plowing_Soil && currentTile != WetPlowing_Soil)
                 {
                     PlowingMap.SetTile(cellPosition, Plowing_Soil);
+                    _playerdata.current_stamina -= 2;
                     //Debug.Log("Plowing Soil tile placed at position: " + cellPosition);
                 }
                 else
@@ -91,6 +95,7 @@ public class TileManager : MonoBehaviour
                 if (currentTile == Plowing_Soil || currentTile == WetPlowing_Soil)
                 {
                     PlowingMap.SetTile(cellPosition, null);
+                    _playerdata.current_stamina -= 2;
                     //Debug.Log("Tile removed at position: " + cellPosition);
                 }
                 else
@@ -118,6 +123,7 @@ public class TileManager : MonoBehaviour
                 if (currentTile == Plowing_Soil || currentTile == WetPlowing_Soil)
                 {
                     PlowingMap.SetTile(cellPosition, WetPlowing_Soil);
+                    _playerdata.current_stamina -= 2;
                     //Debug.Log("Watering at position: " + cellPosition);
                 }
                 else
@@ -159,6 +165,7 @@ public class TileManager : MonoBehaviour
                 if (!plantExists)
                 {
                     Instantiate(plantPrefab, spawnPosition, Quaternion.identity);
+                    _playerdata.current_stamina -= 1;
                     inventoryManager.GetSelectedItem(true);
                 }
                 else

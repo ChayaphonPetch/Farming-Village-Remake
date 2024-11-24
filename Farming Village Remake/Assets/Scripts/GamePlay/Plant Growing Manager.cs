@@ -11,6 +11,8 @@ public class PlantGrowingManager : MonoBehaviour
     public PlantData plantData;
     private int currentGrowthDay = 0;
     private int currentStageIndex = 0;
+
+    public int staminacost = 5  ;
     private SpriteRenderer spriteRenderer;
 
     private bool playerInRange = false;
