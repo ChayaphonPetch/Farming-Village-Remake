@@ -9,12 +9,15 @@ public class PlayerAction : MonoBehaviour
 {
     private TileManager _tileManager;
     private ItemManager _ItemManager;
+    private PlayerMovement _playerMovement;
 
     [SerializeField] private GameObject _inventory;
     [SerializeField] private GameObject _sellstorage;
     [SerializeField] private GameObject _storage;
     [SerializeField] private GameObject _shop;
+    [SerializeField] private GameObject _dialogueBox;
     [SerializeField] private GameObject _player_ui;
+    [SerializeField] private GameObject _toolbar_ui;
     [SerializeField] private GameObject _player;
 
     public bool isNearSellStorage = false;
@@ -42,6 +45,10 @@ public class PlayerAction : MonoBehaviour
             _ItemManager = FindObjectOfType<ItemManager>();
         }
 
+        if (_playerMovement == null)
+        {
+            _playerMovement = FindObjectOfType<PlayerMovement>();
+        }
     }
     private void OnEnable()
     {
@@ -90,7 +97,7 @@ public class PlayerAction : MonoBehaviour
         {
             ToggleSellStorage();
             ToggleStorage();
-            ToggleShop();
+            ToggleDialogue();
         }
     }
 
@@ -123,17 +130,11 @@ public class PlayerAction : MonoBehaviour
 
             if (_sellstorage.activeSelf)
             {
-                move.action.Disable();
-                Sprint.action.Disable();
-                LeftClick.action.Disable();
-                inventoryKey.action.Disable();
+                SetInputState(false);
             }
             else
             {
-                move.action.Enable();
-                Sprint.action.Enable();
-                LeftClick.action.Enable();
-                inventoryKey.action.Enable();
+                SetInputState(true);
             }
         }
         else
@@ -151,17 +152,11 @@ public class PlayerAction : MonoBehaviour
 
             if (_storage.activeSelf)
             {
-                move.action.Disable();
-                Sprint.action.Disable();
-                LeftClick.action.Disable();
-                inventoryKey.action.Disable();
+                SetInputState(false);
             }
             else
             {
-                move.action.Enable();
-                Sprint.action.Enable();
-                LeftClick.action.Enable();
-                inventoryKey.action.Enable();
+                SetInputState(true);
             }
         }
         else
@@ -170,32 +165,43 @@ public class PlayerAction : MonoBehaviour
         }
     }
 
-    private void ToggleShop()
+    public void ToggleShop()
     {
         if (_shop != null && isNearShop == true)
         {
             _shop.SetActive(!_shop.activeSelf);
-            _player_ui.SetActive(!_player_ui.activeSelf);
+            _toolbar_ui.SetActive(!_toolbar_ui.activeSelf);
+            //_player_ui.SetActive(!_player_ui.activeSelf);
 
             if (_shop.activeSelf)
             {
-                move.action.Disable();
-                Sprint.action.Disable();
-                LeftClick.action.Disable();
-                inventoryKey.action.Disable();
+                SetInputState(false);
             }
             else
             {
-                move.action.Enable();
-                Sprint.action.Enable();
-                LeftClick.action.Enable();
-                inventoryKey.action.Enable();
+                SetInputState(true);
             }
         }
         else
         {
             //Debug.Log("Shop is null or player is not near Shop.");
         }
+    }
+
+    private void ToggleDialogue()
+    {
+            _playerMovement.InteractDialogue();
+
+        if (_dialogueBox.activeSelf)
+            {
+                _player_ui.SetActive(!_player_ui.activeSelf);
+                _toolbar_ui.SetActive(!_toolbar_ui.activeSelf);
+                SetInputState(false);
+            }
+            else
+            {
+                SetInputState(true);
+            }
     }
 
 
@@ -229,6 +235,30 @@ public class PlayerAction : MonoBehaviour
         LeftClick.action.Enable();
         inventoryKey.action.Enable();
         _player_ui.SetActive(!_player_ui.activeSelf);
+    }
+
+    public void SetInputState(bool enabled)
+    {
+        if (enabled)
+        {
+            move.action.Enable();
+            Sprint.action.Enable();
+            LeftClick.action.Enable();
+            inventoryKey.action.Enable();
+        }
+        else
+        {
+            move.action.Disable();
+            Sprint.action.Disable();
+            LeftClick.action.Disable();
+            inventoryKey.action.Disable();
+        }
+    }
+
+    public void ActiveUI()
+    {
+        _player_ui.SetActive(!_player_ui.activeSelf);
+        _toolbar_ui.SetActive(!_toolbar_ui.activeSelf);
     }
 }
 

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0601ac796321b0c4f8785e8ac50f7ce8, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  charactername: None
+  characterSprite: {fileID: 0}
+  dialogue:
+  - Hello
+  responses:
+  - responseText: Hello
+    dialogueObject: {fileID: 11400000, guid: 73a044b5496999549a4c5f24ecb25acb, type: 2}
+  - responseText: ....
+    dialogueObject: {fileID: 11400000, guid: acfb7a9fcd74cf04cbba7bbccd7bfbe6, type: 2}

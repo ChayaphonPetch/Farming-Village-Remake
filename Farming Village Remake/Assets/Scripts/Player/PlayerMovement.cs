@@ -20,7 +20,11 @@ public class PlayerMovement : MonoBehaviour
 
     public InputActionReference move;
     public InputActionReference sprint;
+    [SerializeField] private DialogueUI dialogueUI;
 
+    public DialogueUI DialogueUI => dialogueUI;
+
+    public IInteractable Interactable { get; set; }
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -46,6 +50,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+       /* if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (!dialogueUI.IsOpen)
+            {
+                Interactable?.Interact(player: this);
+            }
+        }*/
+
         // Determine movement speed based on sprint input
         _currentSpeed = (sprint != null && sprint.action.IsPressed()) ? moveSpeed_Sprint : moveSpeed_Walk;
 
@@ -71,7 +83,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Update VFX positions
         Vector3 playerPosition = transform.position;
         VFX_FoggyCollider.SetVector3("Collider Position", playerPosition);
         VFX_SnowCollider.SetVector3("Collider Position", playerPosition);
@@ -80,7 +91,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (dialogueUI.IsOpen) return;
+
         rb.velocity = _moveDirection * _currentSpeed;
+    }
+
+    public void InteractDialogue()
+    {
+        if (!dialogueUI.IsOpen)
+        {
+            Interactable?.Interact(player: this);
+        }
     }
 
 }
