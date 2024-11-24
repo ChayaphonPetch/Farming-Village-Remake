@@ -7,6 +7,7 @@ using UnityEngine.VFX;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
+    private Animator _animator;
     public VisualEffect VFX_FoggyCollider;
     public VisualEffect VFX_RainCollider;
      public VisualEffect VFX_SnowCollider;
@@ -20,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
     public InputActionReference move;
     public InputActionReference sprint;
 
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
     private void OnEnable()
     {
         if (move != null)
@@ -41,26 +46,41 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (sprint != null && sprint.action.IsPressed())
-        {
-            _currentSpeed = moveSpeed_Sprint;
-        }
-        else
-        {
-            _currentSpeed = moveSpeed_Walk;
-        }
+        // Determine movement speed based on sprint input
+        _currentSpeed = (sprint != null && sprint.action.IsPressed()) ? moveSpeed_Sprint : moveSpeed_Walk;
 
+        // Read movement input
         if (move != null)
         {
             _moveDirection = move.action.ReadValue<Vector2>();
+
+            // Set animation parameters
+            if (_moveDirection.magnitude > 0.1f)
+            {
+                _animator.SetBool("isWalking", true);
+                _animator.SetFloat("InputX", _moveDirection.x);
+                _animator.SetFloat("InputY", _moveDirection.y);
+
+                // Update last input direction to remember the direction the player was moving
+                _animator.SetFloat("LastInputX", _moveDirection.x);
+                _animator.SetFloat("LastInputY", _moveDirection.y);
+            }
+            else
+            {
+                _animator.SetBool("isWalking", false);
+            }
         }
 
-        VFX_FoggyCollider.SetVector3("Collider Position", transform.position);
-        VFX_SnowCollider.SetVector3("Collider Position", transform.position);
+        // Update VFX positions
+        Vector3 playerPosition = transform.position;
+        VFX_FoggyCollider.SetVector3("Collider Position", playerPosition);
+        VFX_SnowCollider.SetVector3("Collider Position", playerPosition);
     }
+
 
     private void FixedUpdate()
     {
         rb.velocity = _moveDirection * _currentSpeed;
     }
+
 }

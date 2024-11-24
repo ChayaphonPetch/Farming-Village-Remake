@@ -12,6 +12,7 @@ public class DayNightCycle : MonoBehaviour
     [Header("Winter Light")]
     [SerializeField] private Gradient winter_gradient;
 
+    public GameObject[] House_Light;
     void Start()
     {
 
@@ -38,6 +39,7 @@ public class DayNightCycle : MonoBehaviour
         if (worldtimeManager != null && _light != null)
         {
             UpdateLight();
+            UpdateHouseLights();
         }
     }
 
@@ -49,6 +51,28 @@ public class DayNightCycle : MonoBehaviour
 
         _light.color = currentGradient.Evaluate(normalizedTime);
         _light.intensity = GetIntensityBasedOnTime(normalizedTime);
+    }
+
+    void UpdateHouseLights()
+    {
+        if ((worldtimeManager.hours > 20) ||
+            (worldtimeManager.hours == 20 && worldtimeManager.minutes >= 30) ||
+            (worldtimeManager.hours < 10))
+        {
+            SetHouseLightsActive(true);
+        }
+        else
+        {
+            SetHouseLightsActive(false);
+        }
+    }
+
+    void SetHouseLightsActive(bool isActive)
+    {
+        foreach (GameObject houseLight in House_Light)
+        {
+            houseLight.SetActive(isActive);
+        }
     }
 
     float GetNormalizedTimeOfDay()
