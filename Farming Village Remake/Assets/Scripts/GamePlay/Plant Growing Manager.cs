@@ -47,8 +47,11 @@ public class PlantGrowingManager : MonoBehaviour
         TileBase currentTile = _tileManager.PlowingMap.GetTile(plantCellPosition);
         if (currentTile != _tileManager.WetPlowing_Soil)
         {
-            Debug.Log("Plant cannot grow. Tile is not WetPlowing_Soil.");
-            return;
+            if (Random.value > 0.5f) // 50% chance
+            {
+                Debug.Log("Plant cannot grow. Tile is not WetPlowing_Soil.");
+                return;
+            }
         }
 
         currentGrowthDay++;
@@ -59,6 +62,7 @@ public class PlantGrowingManager : MonoBehaviour
             UpdatePlantStage();
         }
     }
+
 
     void UpdatePlantStage()
     {

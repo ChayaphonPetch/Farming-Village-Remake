@@ -19,7 +19,7 @@ MonoBehaviour:
   range: {x: 5, y: 4}
   stackable: 1
   sellable: 1
-  price: 20
+  price: 40
   image: {fileID: 629788746, guid: 357aa56f93c06b5408609afe713a8cef, type: 3}
   Item_Id: 0
   plantdata: {fileID: 0}
