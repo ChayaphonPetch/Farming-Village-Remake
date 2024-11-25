@@ -22,5 +22,7 @@ MonoBehaviour:
     dialogueObject: {fileID: 0}
   - responseText: Talk
     dialogueObject: {fileID: 11400000, guid: 0b39d97ced70c87408a0cbfe4cc4b9b9, type: 2}
+  - responseText: Gift
+    dialogueObject: {fileID: 0}
   - responseText: Bye
     dialogueObject: {fileID: 11400000, guid: 575f87a55c8ce064695b7a5aa14a1973, type: 2}

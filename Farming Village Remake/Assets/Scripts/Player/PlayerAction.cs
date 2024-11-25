@@ -182,8 +182,8 @@ public class PlayerAction : MonoBehaviour
         if (_shop != null && isNearShop == true)
         {
             _shop.SetActive(!_shop.activeSelf);
-            _toolbar_ui.SetActive(!_toolbar_ui.activeSelf);
-            //_player_ui.SetActive(!_player_ui.activeSelf);
+            _toolbar_ui.SetActive(false);
+            _player_ui.SetActive(true);
 
             if (_shop.activeSelf)
             {

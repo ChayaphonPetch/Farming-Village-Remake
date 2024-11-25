@@ -23,6 +23,9 @@ public class UIManager : MonoBehaviour
     public Slider StaminaSlider;
     public TextMeshProUGUI StaminaText;
 
+    [Header("Player Profile")]
+    public TextMeshProUGUI PlayerName;
+
     private WorldTimeManager worldtimeManager;
     private PlayerData playerData;
 
@@ -53,6 +56,7 @@ public class UIManager : MonoBehaviour
             UpdateMoneyDisplay();
         }
         UpdateStarminaDisplay();
+        UpdatePlayerProfile();
     }
 
     void UpdateTimeDisplay()
@@ -79,4 +83,8 @@ public class UIManager : MonoBehaviour
         StaminaText.text = $"{playerData.current_stamina}";
     }
 
+    void UpdatePlayerProfile()
+    {
+        PlayerName.text = playerData.Player_name;
+    }
 }
