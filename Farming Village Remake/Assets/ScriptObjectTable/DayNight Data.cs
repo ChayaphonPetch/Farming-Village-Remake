@@ -20,7 +20,13 @@
        [Header("Day/Night Icon")]
         public Image Day_Icon;
         public Image Night_Icon;
-    }
+
+        [Header("Weather Icon")]
+        public Image Clear_Icon;
+        public Image Rain_Icon;
+        public Image Snow_Icon;
+
+}
 
     public enum Seasons_Cycle
     {

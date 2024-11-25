@@ -130,11 +130,17 @@ public class PlayerAction : MonoBehaviour
 
             if (_sellstorage.activeSelf)
             {
-                SetInputState(false);
+                move.action.Disable();
+                Sprint.action.Disable();
+                LeftClick.action.Disable();
+                inventoryKey.action.Disable();
             }
             else
             {
-                SetInputState(true);
+                move.action.Enable();
+                Sprint.action.Enable();
+                LeftClick.action.Enable();
+                inventoryKey.action.Enable();
             }
         }
         else
@@ -152,11 +158,17 @@ public class PlayerAction : MonoBehaviour
 
             if (_storage.activeSelf)
             {
-                SetInputState(false);
+                move.action.Disable();
+                Sprint.action.Disable();
+                LeftClick.action.Disable();
+                inventoryKey.action.Disable();
             }
             else
             {
-                SetInputState(true);
+                move.action.Enable();
+                Sprint.action.Enable();
+                LeftClick.action.Enable();
+                inventoryKey.action.Enable();
             }
         }
         else
@@ -175,11 +187,17 @@ public class PlayerAction : MonoBehaviour
 
             if (_shop.activeSelf)
             {
-                SetInputState(false);
+                move.action.Disable();
+                Sprint.action.Disable();
+                LeftClick.action.Disable();
+                inventoryKey.action.Disable();
             }
             else
             {
-                SetInputState(true);
+                move.action.Enable();
+                Sprint.action.Enable();
+                LeftClick.action.Enable();
+                inventoryKey.action.Enable();
             }
         }
         else
@@ -190,18 +208,24 @@ public class PlayerAction : MonoBehaviour
 
     private void ToggleDialogue()
     {
-            _playerMovement.InteractDialogue();
+        _playerMovement.InteractDialogue();
 
         if (_dialogueBox.activeSelf)
             {
-                _player_ui.SetActive(!_player_ui.activeSelf);
-                _toolbar_ui.SetActive(!_toolbar_ui.activeSelf);
-                SetInputState(false);
-            }
+            _player_ui.SetActive(!_player_ui.activeSelf);
+            _toolbar_ui.SetActive(!_toolbar_ui.activeSelf);
+            move.action.Disable();
+            Sprint.action.Disable();
+            LeftClick.action.Disable();
+            inventoryKey.action.Disable();
+        }
             else
             {
-                SetInputState(true);
-            }
+            move.action.Enable();
+            Sprint.action.Enable();
+            LeftClick.action.Enable();
+            inventoryKey.action.Enable();
+        }
     }
 
 

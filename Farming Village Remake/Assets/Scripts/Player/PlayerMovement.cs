@@ -100,7 +100,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!dialogueUI.IsOpen)
         {
+            _moveDirection = Vector2.zero;
+            rb.velocity = Vector2.zero;
             Interactable?.Interact(player: this);
+
         }
     }
 
