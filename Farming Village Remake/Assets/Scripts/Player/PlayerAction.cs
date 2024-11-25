@@ -29,6 +29,7 @@ public class PlayerAction : MonoBehaviour
     public InputActionReference Sprint;
     public InputActionReference Menu;
     public InputActionReference LeftClick;
+    public InputActionReference Interact;
 
     void Start()
     {
@@ -76,9 +77,9 @@ public class PlayerAction : MonoBehaviour
 
         }
 
-        if (LeftClick.action.IsPressed())
-        {   
-            _ItemManager.PerformAction(ActionType.Plowing);
+        if (Interact.action.IsPressed())
+        {
+            ToggleDialogue();
         }
 
 
@@ -97,7 +98,6 @@ public class PlayerAction : MonoBehaviour
         {
             ToggleSellStorage();
             ToggleStorage();
-            ToggleDialogue();
         }
     }
 
@@ -218,6 +218,7 @@ public class PlayerAction : MonoBehaviour
             Sprint.action.Disable();
             LeftClick.action.Disable();
             inventoryKey.action.Disable();
+            Interact.action.Disable();
         }
             else
             {
@@ -258,6 +259,7 @@ public class PlayerAction : MonoBehaviour
         Sprint.action.Enable();
         LeftClick.action.Enable();
         inventoryKey.action.Enable();
+        Interact.action.Enable();
         _player_ui.SetActive(!_player_ui.activeSelf);
     }
 
@@ -283,6 +285,15 @@ public class PlayerAction : MonoBehaviour
     {
         _player_ui.SetActive(!_player_ui.activeSelf);
         _toolbar_ui.SetActive(!_toolbar_ui.activeSelf);
+    }
+
+    public void EnableLock()
+    {
+        move.action.Enable();
+        Sprint.action.Enable();
+        LeftClick.action.Enable();
+        inventoryKey.action.Enable();
+        Interact.action.Enable();
     }
 }
 

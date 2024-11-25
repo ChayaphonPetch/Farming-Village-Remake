@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] public int maxStackedItems = 64;
+    public GameObject Holditemimage;
     public InventorySlot[] inventorySlots;
     public InventorySlot[] ToolbarSelect;
     public InputAction[] inventorySlots_key;
@@ -46,6 +48,7 @@ public class InventoryManager : MonoBehaviour
                 break;
             }
         }
+        ShowItemSlot();
     }
 
     void ChangeSelectedSlot(int newValue)
@@ -116,5 +119,32 @@ public class InventoryManager : MonoBehaviour
         return null;
     }
 
-        
+    public void ShowItemSlot()
+    {
+        InventorySlot slot = inventorySlots[selectedSlot];
+        InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
+        if (itemInSlot != null)
+        {
+            Item item = itemInSlot.item;
+
+            if (item != null)
+            {
+                if (item.type != ItemType.Tool)
+                {
+                    Holditemimage.GetComponent<SpriteRenderer>().sprite = item.image;
+                    Holditemimage.SetActive(true);
+                }
+                else
+                {
+                    Holditemimage.SetActive(false);
+                }   
+            }
+        }
+        else
+        {
+            Holditemimage.SetActive(false);
+        }
+    }
+
 }

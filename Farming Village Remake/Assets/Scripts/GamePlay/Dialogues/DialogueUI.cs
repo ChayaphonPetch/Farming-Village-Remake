@@ -11,6 +11,10 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private TMP_Text textLabel;
     [SerializeField] private Image characterimage;
     [SerializeField] private TMP_Text nameLabel;
+    [SerializeField] private GameObject[] Relationship;
+
+    [SerializeField] private Image Heart;
+    [SerializeField] private Image EmptyHeart;
 
     public bool IsOpen { get; private set; }
     public bool IsUIOpen { get; private set; }
@@ -24,7 +28,6 @@ public class DialogueUI : MonoBehaviour
         typewriterEffect = GetComponent<TypewriterEffect>();
         responseHandler = GetComponent<ResponseHandler>();
         CloseDialogueBox();
-        //GetComponent<TypewriterEffect>().Run(textToType: "nah, i'd win\nIdiot SkibidiPT", textLabel);
     }
 
     public void ShowDialogue(DialogueObject dialogueObject)
@@ -36,6 +39,11 @@ public class DialogueUI : MonoBehaviour
         characterimage.sprite = dialogueObject.CharacterSprite;
         nameLabel.text = dialogueObject.CharacterName;
         characterimage.gameObject.SetActive(true);
+
+        foreach (GameObject relationshipObject in Relationship)
+        {
+            relationshipObject.SetActive(dialogueObject.IsRelationship);
+        }
 
 
 
@@ -72,6 +80,7 @@ public class DialogueUI : MonoBehaviour
             CloseDialogueBox();
             _playeraction.SetInputState(true);
             _playeraction.ActiveUI();
+            _playeraction.EnableLock();
         }
     }
 
@@ -97,6 +106,7 @@ public class DialogueUI : MonoBehaviour
         dialogueBox.SetActive(false);
         textLabel.text = string.Empty;
         nameLabel.text = string.Empty;
+        
     }
 }
 

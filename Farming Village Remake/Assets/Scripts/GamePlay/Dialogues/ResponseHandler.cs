@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class ResponseHandler : MonoBehaviour
 {
+    private PlayerAction _playeraction;
+
     [SerializeField] private RectTransform responseBox;
     [SerializeField] private RectTransform responseButtonTemplate;
     [SerializeField] private RectTransform responseContainer;
@@ -17,6 +19,7 @@ public class ResponseHandler : MonoBehaviour
 
     private void Start()
     {
+        _playeraction = FindObjectOfType<PlayerAction>();
         dialogueUI = GetComponent<DialogueUI>();
     }
 
@@ -72,6 +75,9 @@ public class ResponseHandler : MonoBehaviour
         else
         {
             dialogueUI.CloseDialogueBox();
+            _playeraction.SetInputState(true);
+            _playeraction.EnableLock();
+            _playeraction.ActiveUI();
         }
     }
 }

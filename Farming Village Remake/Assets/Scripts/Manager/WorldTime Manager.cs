@@ -15,8 +15,9 @@ public class WorldTimeManager : MonoBehaviour
     public VisualEffect[] Weathers_Effect;
 
     public DayNightData[] ResetTimeData;
-    public TileManager _tilemanager;
+    private TileManager _tilemanager;
     private ShopManager _shopmanager;
+    private SellStorageManager _SellStorageManager;
 
     void Awake()
     {
@@ -37,6 +38,8 @@ public class WorldTimeManager : MonoBehaviour
     void Start()
     {
         _shopmanager = FindObjectOfType<ShopManager>();
+        _SellStorageManager = FindObjectOfType<SellStorageManager>();
+        _tilemanager = FindObjectOfType<TileManager>();
     }
 
     void Update()
@@ -62,6 +65,7 @@ public class WorldTimeManager : MonoBehaviour
             {
                 hours = 0;
                 day++;
+                _SellStorageManager.SellItems();
 
                 if (day > 31)
                 {
@@ -89,7 +93,7 @@ public class WorldTimeManager : MonoBehaviour
         //Debug.Log($"Season changed to: {Seasons}");
     }
 
-    void ChangeWeather()
+    public void ChangeWeather()
     {
         int randomWeather = Random.Range(1, 101);
         if (Seasons == "Summer")

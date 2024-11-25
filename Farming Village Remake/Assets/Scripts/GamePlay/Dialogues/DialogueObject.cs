@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class DialogueObject : ScriptableObject
 {
     [SerializeField] private string charactername;
-    [SerializeField] Sprite characterSprite; 
+    [SerializeField] Sprite characterSprite;
+    [SerializeField] private bool isRelationship;
     [SerializeField][TextArea] private string[] dialogue;
     [SerializeField] private Response[] responses;
 
@@ -18,6 +19,8 @@ public class DialogueObject : ScriptableObject
     public string CharacterName => charactername;
 
     public Sprite CharacterSprite => characterSprite;
+
+    public bool IsRelationship => isRelationship;
 
 
 }

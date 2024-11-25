@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactername: Alice
   characterSprite: {fileID: 0}
+  isRelationship: 1
   dialogue:
   - Hello, My name is Alice.
   responses: []

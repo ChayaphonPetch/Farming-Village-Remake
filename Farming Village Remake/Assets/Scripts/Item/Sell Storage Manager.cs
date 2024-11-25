@@ -8,11 +8,14 @@ public class SellStorageManager : MonoBehaviour
     public int moneyget;
     public int Total;
     private PlayerData playerData;
+    private WorldTimeManager worldTimeManager;
 
     void Start()
     {
         playerData = FindObjectOfType<PlayerData>();
+        worldTimeManager = FindObjectOfType<WorldTimeManager>();
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -34,6 +37,16 @@ public class SellStorageManager : MonoBehaviour
 
                 if (itemInSlot.item.sellable)
                 {
+                    if (itemInSlot.item.seasonsell.ToString() == "Summer" && worldTimeManager.Seasons != "Summer")
+                    {
+                        itemTotal = Mathf.CeilToInt(itemTotal * 1.03f);
+                    }
+
+                    else if (itemInSlot.item.seasonsell.ToString() == "Winter" && worldTimeManager.Seasons != "Winter")
+                    {
+                        itemTotal = Mathf.CeilToInt(itemTotal * 1.05f); 
+                    }
+
                     Debug.Log("Item Price: " + itemTotal);
                     Total += itemTotal;
                     Destroy(itemInSlot.gameObject);
@@ -44,8 +57,7 @@ public class SellStorageManager : MonoBehaviour
         Debug.Log("Grand Total: " + Total);
         playerData.current_money += Total;
         Total = 0;
-
-
+    }
 
         /*if (currentSlot != null && currentSlot.item != null)
             {
@@ -78,8 +90,8 @@ public class SellStorageManager : MonoBehaviour
                     currentSlot.stackCount = 0;
                 }
             }*/
-    }
-    }
+   }
+    
 
 
 

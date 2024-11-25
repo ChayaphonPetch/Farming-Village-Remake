@@ -15,7 +15,7 @@ MonoBehaviour:
   itemname: Garlic
   type: 3
   actionType: 0
-  seasonsell: 0
+  seasonsell: 2
   range: {x: 5, y: 4}
   stackable: 1
   sellable: 1
