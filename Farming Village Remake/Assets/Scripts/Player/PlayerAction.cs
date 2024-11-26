@@ -18,6 +18,7 @@ public class PlayerAction : MonoBehaviour
     [SerializeField] private GameObject _dialogueBox;
     [SerializeField] private GameObject _player_ui;
     [SerializeField] private GameObject _toolbar_ui;
+    [SerializeField] private GameObject _menu_ui;
     [SerializeField] private GameObject _player;
 
     public bool isNearSellStorage = false;
@@ -72,9 +73,9 @@ public class PlayerAction : MonoBehaviour
     void Update()   
     {
 
-        if (_ItemManager == null)
+        if (Menu.action.WasPressedThisFrame())
         {
-
+            Resume();
         }
 
         if (Interact.action.IsPressed())
@@ -294,6 +295,20 @@ public class PlayerAction : MonoBehaviour
         LeftClick.action.Enable();
         inventoryKey.action.Enable();
         Interact.action.Enable();
+    }
+
+    public void Resume()
+    {
+            _menu_ui.SetActive(!_menu_ui.activeSelf);
+
+            if (_menu_ui.activeSelf)
+            {
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
     }
 }
 
