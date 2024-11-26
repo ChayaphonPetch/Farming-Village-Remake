@@ -87,4 +87,9 @@ public class UIManager : MonoBehaviour
     {
         PlayerName.text = playerData.Player_name;
     }
+
+    public void IncreaseMaxStamina(int increaseAmount)
+    {
+        StaminaSlider.maxValue += increaseAmount;
+    }
 }

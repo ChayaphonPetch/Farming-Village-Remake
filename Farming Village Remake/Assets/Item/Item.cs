@@ -31,11 +31,11 @@ public class Item : ScriptableObject {
 public enum ItemType
 {
     None, Tool, Seed, Material
-}
+}   
 
 public enum ActionType
 {
-    None, Digging, Cutting, Watering, Plowing, Plant
+    None, Digging, Cutting, Watering, Plowing, Plant, Gift
 }
 
 public enum SeasonSell

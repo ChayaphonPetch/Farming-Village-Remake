@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _moveDirection;
     private float _currentSpeed;
 
+    private NPCData _npcData;
+
     public InputActionReference move;
     public InputActionReference sprint;
     [SerializeField] private DialogueUI dialogueUI;
@@ -28,6 +30,11 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        _npcData = FindObjectOfType<NPCData>();
     }
     private void OnEnable()
     {
@@ -58,15 +65,22 @@ public class PlayerMovement : MonoBehaviour
             }
         }*/
 
-        // Determine movement speed based on sprint input
         _currentSpeed = (sprint != null && sprint.action.IsPressed()) ? moveSpeed_Sprint : moveSpeed_Walk;
 
-        // Read movement input
+        if (_npcData != null && _npcData.isAlexTotem)
+        {
+            _currentSpeed *= 1.07f;
+            //Debug.Log("Alex Totem is true. Current speed: " + _currentSpeed);
+        }
+        else
+        {
+            //Debug.Log("Alex Totem is false. Current speed: " + _currentSpeed);
+        }
+
         if (move != null)
         {
             _moveDirection = move.action.ReadValue<Vector2>();
 
-            // Set animation parameters
             if (_moveDirection.magnitude > 0.1f)
             {
                 _animator.SetBool("isWalking", true);

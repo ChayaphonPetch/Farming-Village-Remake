@@ -192,6 +192,7 @@ public class PlayerAction : MonoBehaviour
                 Sprint.action.Disable();
                 LeftClick.action.Disable();
                 inventoryKey.action.Disable();
+                Interact.action.Disable();
             }
             else
             {
@@ -199,6 +200,7 @@ public class PlayerAction : MonoBehaviour
                 Sprint.action.Enable();
                 LeftClick.action.Enable();
                 inventoryKey.action.Enable();
+                Interact.action.Enable();
             }
         }
         else

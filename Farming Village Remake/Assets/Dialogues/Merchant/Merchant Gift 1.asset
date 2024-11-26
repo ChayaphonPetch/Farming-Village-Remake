@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0601ac796321b0c4f8785e8ac50f7ce8, type: 3}
   m_Name: Merchant Gift 1
   m_EditorClassIdentifier: 
-  charactername: 
+  charactername: Old Man
   characterSprite: {fileID: 0}
-  isRelationship: 0
-  dialogue: []
+  isRelationship: 1
+  dialogue:
+  - "Hey, you brought me something nice again, huh? Thanks a lot! I\u2019ll find
+    a good place to display this."
   responses: []

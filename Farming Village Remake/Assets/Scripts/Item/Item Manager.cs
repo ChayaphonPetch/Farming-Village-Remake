@@ -18,7 +18,7 @@ public class ItemManager : MonoBehaviour
         _playerdata = _playerdata ?? FindObjectOfType<PlayerData>();
     }
 
-    private bool IsValidItem(Item item, ItemType type, ActionType action)
+    public bool IsValidItem(Item item, ItemType type, ActionType action)
     {
         return item != null && item.type == type && item.actionType == action;
     }

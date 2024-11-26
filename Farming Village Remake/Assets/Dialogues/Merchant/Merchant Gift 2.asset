@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0601ac796321b0c4f8785e8ac50f7ce8, type: 3}
   m_Name: Merchant Gift 2
   m_EditorClassIdentifier: 
-  charactername: 
+  charactername: Old Man
   characterSprite: {fileID: 0}
-  isRelationship: 0
-  dialogue: []
-  responses: []
+  isRelationship: 1
+  dialogue:
+  - "You\u2019re really too kind. Thank you for always thinking of me. Even a small
+    thing like this makes my day."
+  responses:
+  - responseText: ...
+    dialogueObject: {fileID: 0}

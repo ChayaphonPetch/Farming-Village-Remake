@@ -9,11 +9,13 @@ public class SellStorageManager : MonoBehaviour
     public int Total;
     private PlayerData playerData;
     private WorldTimeManager worldTimeManager;
+    private NPCData npcData;
 
     void Start()
     {
         playerData = FindObjectOfType<PlayerData>();
         worldTimeManager = FindObjectOfType<WorldTimeManager>();
+        npcData = FindObjectOfType<NPCData>();
     }
 
     void Update()
@@ -23,7 +25,6 @@ public class SellStorageManager : MonoBehaviour
             SellItems();
         }
     }
-
     public void SellItems()
     {
         for (int i = 0; i < sellslots.Length; i++)
@@ -37,18 +38,26 @@ public class SellStorageManager : MonoBehaviour
 
                 if (itemInSlot.item.sellable)
                 {
+                    // Check seasonal sell modifier
                     if (itemInSlot.item.seasonsell.ToString() == "Summer" && worldTimeManager.Seasons != "Summer")
                     {
                         itemTotal = Mathf.CeilToInt(itemTotal * 1.03f);
                     }
-
                     else if (itemInSlot.item.seasonsell.ToString() == "Winter" && worldTimeManager.Seasons != "Winter")
                     {
-                        itemTotal = Mathf.CeilToInt(itemTotal * 1.05f); 
+                        itemTotal = Mathf.CeilToInt(itemTotal * 1.05f);
+                    }
+
+                    // Apply Alex Totem bonus
+                    if (npcData.isAliceTotem)
+                    {
+                        itemTotal = Mathf.CeilToInt(itemTotal * 1.03f); // Increase by 3%
                     }
 
                     Debug.Log("Item Price: " + itemTotal);
                     Total += itemTotal;
+
+                    // Destroy the sold item
                     Destroy(itemInSlot.gameObject);
                 }
             }
@@ -59,38 +68,38 @@ public class SellStorageManager : MonoBehaviour
         Total = 0;
     }
 
-        /*if (currentSlot != null && currentSlot.item != null)
+    /*if (currentSlot != null && currentSlot.item != null)
+        {
+            // Get the current item's price
+            int itemPrice = currentSlot.item.price;
+
+            // Sell the item based on the stack count
+            if (currentSlot.item.stackable && currentSlot.stackCount > 1)
             {
-                // Get the current item's price
-                int itemPrice = currentSlot.item.price;
+                // Sell the whole stack or part of it
+                int amountToSell = currentSlot.stackCount;
+                SellItem(currentSlot.item, amountToSell);
 
-                // Sell the item based on the stack count
-                if (currentSlot.item.stackable && currentSlot.stackCount > 1)
+                // Remove the sold items from the stack
+                currentSlot.stackCount -= amountToSell;
+
+                // If the stack becomes empty, remove the item reference
+                if (currentSlot.stackCount <= 0)
                 {
-                    // Sell the whole stack or part of it
-                    int amountToSell = currentSlot.stackCount;
-                    SellItem(currentSlot.item, amountToSell);
-
-                    // Remove the sold items from the stack
-                    currentSlot.stackCount -= amountToSell;
-
-                    // If the stack becomes empty, remove the item reference
-                    if (currentSlot.stackCount <= 0)
-                    {
-                        currentSlot.item = null;
-                    }
-                }
-                else
-                {
-                    // Sell a single item if it's not stackable or if there's only 1 left
-                    SellItem(currentSlot.item, 1);
-
-                    // Remove the item from the slot
                     currentSlot.item = null;
-                    currentSlot.stackCount = 0;
                 }
-            }*/
-   }
+            }
+            else
+            {
+                // Sell a single item if it's not stackable or if there's only 1 left
+                SellItem(currentSlot.item, 1);
+
+                // Remove the item from the slot
+                currentSlot.item = null;
+                currentSlot.stackCount = 0;
+            }
+        }*/
+}
     
 
 

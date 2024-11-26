@@ -21,12 +21,14 @@ public class DialogueUI : MonoBehaviour
 
     private ResponseHandler responseHandler;
     private TypewriterEffect typewriterEffect;
+    private NPCManager npcManager;
 
     private void Start()
     {
         _playeraction = FindObjectOfType<PlayerAction>();
         typewriterEffect = GetComponent<TypewriterEffect>();
         responseHandler = GetComponent<ResponseHandler>();
+        npcManager = GetComponent<NPCManager>();
         CloseDialogueBox();
     }
 
@@ -75,6 +77,7 @@ public class DialogueUI : MonoBehaviour
         {
             responseHandler.ShowResponses(dialogueObject.Responses);
         }
+        
         else
         {
             CloseDialogueBox();

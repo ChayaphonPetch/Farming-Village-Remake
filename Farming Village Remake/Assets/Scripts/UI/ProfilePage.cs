@@ -10,6 +10,16 @@ public class ProfilePage : MonoBehaviour
 
     void Start()
     {
+
+    }
+
+    private void Update()
+    {
+        UpdatePlayerProfile();
+    }
+
+    void UpdatePlayerProfile()
+    {
         if (playerImage != null && playerObject != null)
         {
             SpriteRenderer playerSpriteRenderer = playerObject.GetComponent<SpriteRenderer>();
@@ -27,5 +37,4 @@ public class ProfilePage : MonoBehaviour
             //Debug.LogError("Player Image or Player Object is not assigned.");
         }
     }
-
 }

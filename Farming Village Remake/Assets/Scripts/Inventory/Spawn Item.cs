@@ -64,16 +64,12 @@ public class SpawnItem : MonoBehaviour
 
     public void UseToolItem()
     {
-        // Retrieve the currently selected item without modifying the inventory.
         Item receivedItem = inventoryManager.GetSelectedItem(false);
 
-        // Check if an item was selected.
         if (receivedItem != null)
         {
-            // Determine if the item is a Tool or not and set the getSelectedItem parameter accordingly.
             bool isTool = (receivedItem.type == ItemType.Tool);
 
-            // Get the item based on whether it is a Tool or something else.
             receivedItem = inventoryManager.GetSelectedItem(!isTool);
 
             if (receivedItem != null)
