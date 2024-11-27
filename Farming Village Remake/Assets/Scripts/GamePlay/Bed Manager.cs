@@ -29,7 +29,14 @@ public class BedManager : MonoBehaviour
             if (currentTotalMinutes <= limitNightMinutes && currentTotalMinutes >= limitMorningMinutes)
             {
                 _WorldTimeManager.day++;
-                _SellStorageManager.SellItems();
+
+            PlantGrowingManager[] allPlantManagers = FindObjectsOfType<PlantGrowingManager>();
+            foreach (var plantManager in allPlantManagers)
+            {
+                plantManager.OnDayPassed();
+            }
+
+            _SellStorageManager.SellItems();
                 _WorldTimeManager.ChangeWeather();
                 _tilemanager.ConvertAllWetSoiltoSoil();
                 _playerdata.current_stamina = (int)_uimanager.StaminaSlider.maxValue;
