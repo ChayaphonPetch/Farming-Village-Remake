@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0601ac796321b0c4f8785e8ac50f7ce8, type: 3}
   m_Name: Alex Greeting
   m_EditorClassIdentifier: 
-  charactername: Alex Schwarz
+  charactername: ...
   characterSprite: {fileID: 0}
   isRelationship: 1
   dialogue:
@@ -22,4 +22,6 @@ MonoBehaviour:
 
 '
   - Nice to meet you.
-  responses: []
+  responses:
+  - responseText: ...
+    dialogueObject: {fileID: 0}
