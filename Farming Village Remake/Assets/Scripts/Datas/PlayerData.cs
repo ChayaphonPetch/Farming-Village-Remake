@@ -27,15 +27,6 @@ public class PlayerData : MonoBehaviour
             MoneyTotal += current_money - previous_money;
             previous_money = current_money;
         }
-
-        playtime += Time.deltaTime;
     }
 
-    void DisplayPlaytime(float totalSeconds)
-    {
-        int days = Mathf.FloorToInt(totalSeconds / 86400);
-        int hours = Mathf.FloorToInt((totalSeconds % 86400) / 3600);
-        int minutes = Mathf.FloorToInt((totalSeconds % 3600) / 60);
-        int seconds = Mathf.FloorToInt(totalSeconds % 60);
-    }
 }

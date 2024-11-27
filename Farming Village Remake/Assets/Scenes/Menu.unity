@@ -48460,6 +48460,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 927759346}
+        m_TargetAssemblyTypeName: CharacterCreate, Assembly-CSharp
+        m_MethodName: CreateCharacter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &595540300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48830,8 +48842,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dd9328f93de18e94195b7060b2fcb858, type: 2}
-  m_sharedMaterial: {fileID: 7459374388667202825, guid: dd9328f93de18e94195b7060b2fcb858, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -70377,8 +70389,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Character Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dd9328f93de18e94195b7060b2fcb858, type: 2}
-  m_sharedMaterial: {fileID: 7459374388667202825, guid: dd9328f93de18e94195b7060b2fcb858, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -78262,7 +78274,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CreateButton: {fileID: 595540299}
   NameInput: {fileID: 587514726}
-  Name: 
 --- !u!1 &929913745
 GameObject:
   m_ObjectHideFlags: 0
