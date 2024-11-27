@@ -14,16 +14,19 @@ public class BuySlotItem : MonoBehaviour
 
     public TextMeshProUGUI totalprice;
     public TMP_InputField amount;
+    public TextMeshProUGUI Discount;
     public Button buybutton;
 
     [HideInInspector] public Item item;
     public PlayerData playerdata;
     private InventoryManager inventoryManager;
+    private NPCData npcdata;
 
     private void Start()
     {
         playerdata = FindObjectOfType<PlayerData>();
         inventoryManager = FindObjectOfType<InventoryManager>();
+        npcdata = FindObjectOfType<NPCData>();
         amount.contentType = TMP_InputField.ContentType.IntegerNumber;
         amount.text = "1";
         ValidateAmount();
@@ -44,7 +47,8 @@ public class BuySlotItem : MonoBehaviour
     {
         if (int.TryParse(amount.text, out int value) && value > 0)
         {
-            int totalCost = item.price * value;
+            int itemPrice = npcdata.isOld_ManTotem ? item.price / 2 : item.price;
+            int totalCost = itemPrice * value;
 
             if (playerdata.current_money >= totalCost)
             {
@@ -78,8 +82,6 @@ public class BuySlotItem : MonoBehaviour
         }
     }
 
-
-
     private void ValidateAmount()
     {
         if (int.TryParse(amount.text, out int value))
@@ -99,12 +101,13 @@ public class BuySlotItem : MonoBehaviour
         else
         {
             amount.text = "1";
-            UpdateTotalPrice(0);
+            UpdateTotalPrice(1);
         }
     }
 
     private void UpdateTotalPrice(int quantity)
     {
-        totalprice.text = (item.price * quantity).ToString();
+        int itemPrice = npcdata.isOld_ManTotem ? item.price / 2 : item.price;
+        totalprice.text = (itemPrice * quantity).ToString();
     }
 }

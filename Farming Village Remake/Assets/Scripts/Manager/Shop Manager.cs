@@ -10,7 +10,6 @@ public class ShopManager : MonoBehaviour
 
     public GameObject shopslots;
     public GameObject buyslot;
-    public Transform content;
 
     public Item[] itemseeds;
 

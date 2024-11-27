@@ -213,4 +213,26 @@ public class NPCData : MonoBehaviour
         }
     }
 
+    public void AddReceivePoint(int NpcIndex)
+    {
+        switch (NpcIndex)
+        {
+            case 0:
+                Marin_gift_receive++;
+                break;
+            case 1:
+                Alice_gift_receive++;
+                break;
+            case 2:
+                Alex_gift_receive++;
+                break;
+            case 3:
+                Old_Man_gift_receive++;
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }

@@ -66,12 +66,12 @@ public class WorldTimeManager : MonoBehaviour
                 hours = 0;
                 day++;
                 _SellStorageManager.SellItems();
+                _shopmanager.SpawnBuySlots();
 
                 if (day > 31)
                 {
                     day = 1;
                     ChangeSeason();
-                    _shopmanager.SpawnBuySlots();
                 }
 
                 PlantGrowingManager[] allPlantManagers = FindObjectsOfType<PlantGrowingManager>();

@@ -43,4 +43,13 @@ public class NPCManager : MonoBehaviour
         }
 
     }
+
+    public void IncreaseReceivePoint(int npcindex)
+    {
+        Item receivedItem = _inventorymanager.GetSelectedItem(false);
+        if (_itemmanager.IsValidItem(receivedItem, ItemType.Material, ActionType.Gift))
+        {
+            _data.AddReceivePoint(npcindex);
+        }
+    }
 }
