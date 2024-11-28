@@ -18,6 +18,7 @@ public class WorldTimeManager : MonoBehaviour
     private TileManager _tilemanager;
     private ShopManager _shopmanager;
     private SellStorageManager _SellStorageManager;
+    private NPCData _npcdata;
 
     void Awake()
     {
@@ -96,6 +97,12 @@ public class WorldTimeManager : MonoBehaviour
     public void ChangeWeather()
     {
         int randomWeather = Random.Range(1, 101);
+
+        if (_npcdata.isMarinTotem)
+        {
+            randomWeather = Mathf.Clamp(randomWeather - 10, 1, 100);
+        }
+
         if (Seasons == "Summer")
         {
             if (randomWeather <= 75)
