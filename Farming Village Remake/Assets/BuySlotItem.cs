@@ -47,7 +47,7 @@ public class BuySlotItem : MonoBehaviour
     {
         if (int.TryParse(amount.text, out int value) && value > 0)
         {
-            int itemPrice = npcdata.isOld_ManTotem ? item.price / 2 : item.price;
+            int itemPrice = npcdata.isOld_ManTotem ? item.price * 9 / 10 : item.price;
             int totalCost = itemPrice * value;
 
             if (playerdata.current_money >= totalCost)
@@ -107,7 +107,8 @@ public class BuySlotItem : MonoBehaviour
 
     private void UpdateTotalPrice(int quantity)
     {
-        int itemPrice = npcdata.isOld_ManTotem ? item.price / 2 : item.price;
+        int itemPrice = npcdata.isOld_ManTotem ? item.price * 9 / 10 : item.price;
+
         totalprice.text = (itemPrice * quantity).ToString();
     }
 }

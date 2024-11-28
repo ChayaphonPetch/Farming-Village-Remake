@@ -17,7 +17,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI ShopCoinText;
 
     [Header("Sprite")]
-    public Image DayNight_Icon;
+    public Image Season_Icon;
+    public Sprite Season_Summer, Season_Winter;
 
     [Header("Stamina")]
     public Slider StaminaSlider;
@@ -57,6 +58,7 @@ public class UIManager : MonoBehaviour
         }
         UpdateStarminaDisplay();
         UpdatePlayerProfile();
+        UpdateSeasonIcon();
     }
 
     void UpdateTimeDisplay()
@@ -87,6 +89,19 @@ public class UIManager : MonoBehaviour
     {
         PlayerName.text = playerData.Player_name;
     }
+
+    void UpdateSeasonIcon()
+    {
+        if (worldtimeManager.Seasons == "Summer")
+        {
+            Season_Icon.sprite = Season_Summer;
+        }
+        else if (worldtimeManager.Seasons == "Winter")
+        {
+            Season_Icon.sprite = Season_Winter;
+        }
+    }
+
 
     public void IncreaseMaxStamina(int increaseAmount)
     {
