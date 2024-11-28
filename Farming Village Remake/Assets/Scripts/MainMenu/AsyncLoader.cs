@@ -7,12 +7,15 @@ public class AsyncLoader : MonoBehaviour
 {
     [Header("Select")]
     [SerializeField] private GameObject LoadingScreen;
-    [SerializeField] private GameObject Main;
+    [SerializeField] private GameObject[] Main;
     
 
     public void LoadingNextscreen(string levelToLoad)
     {
-        Main.SetActive(false);
+        for (int i = 0; i < Main.Length; i++)
+        {
+            Main[i].SetActive(false);
+        }
         LoadingScreen.SetActive(true);
 
         StartCoroutine(LoadScreenAsync(levelToLoad));
@@ -30,7 +33,7 @@ public class AsyncLoader : MonoBehaviour
         }
 
         // Wait for 5 seconds on the loading screen
-        yield return new WaitForSeconds(2f);
+        //yield return new WaitForSeconds(2f);
 
         // Allow the scene to be activated
         loadOperation.allowSceneActivation = true;
