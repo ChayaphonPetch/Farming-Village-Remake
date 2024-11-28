@@ -20,6 +20,7 @@ MonoBehaviour:
   stackable: 1
   sellable: 1
   price: 25
+  DayGrown: 6
   image: {fileID: -273057077, guid: 5f734cb05635b9f4391cb30f05a00574, type: 3}
   Item_Id: 0
   plantdata: {fileID: 11400000, guid: 0ada17f396c4307489cffe6661ed1bfa, type: 2}

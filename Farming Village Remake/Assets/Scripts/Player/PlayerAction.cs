@@ -10,6 +10,8 @@ public class PlayerAction : MonoBehaviour
     private TileManager _tileManager;
     private ItemManager _ItemManager;
     private PlayerMovement _playerMovement;
+    private PlayerData _playerdata;
+    private UIManager _uimanager;
 
     [SerializeField] private GameObject _inventory;
     [SerializeField] private GameObject _sellstorage;
@@ -20,6 +22,7 @@ public class PlayerAction : MonoBehaviour
     [SerializeField] private GameObject _toolbar_ui;
     [SerializeField] private GameObject _menu_ui;
     [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _Lenten;
 
     public bool isNearSellStorage = false;
     public bool isNearStorage = false;
@@ -31,9 +34,13 @@ public class PlayerAction : MonoBehaviour
     public InputActionReference Menu;
     public InputActionReference LeftClick;
     public InputActionReference Interact;
+    public InputActionReference Lenten;
 
-    void Start()
+    void Start()    
     {
+        if (Time.timeScale == 0f)
+            Time.timeScale = 1.0f;
+
         if (_inventory != null)
             _inventory.SetActive(false);
 
@@ -50,6 +57,16 @@ public class PlayerAction : MonoBehaviour
         if (_playerMovement == null)
         {
             _playerMovement = FindObjectOfType<PlayerMovement>();
+        }
+
+        if (_playerdata == null)
+        {
+            _playerdata = FindObjectOfType<PlayerData>();
+        }
+
+        if (_uimanager == null)
+        {
+            _uimanager = FindObjectOfType<UIManager>();
         }
     }
     private void OnEnable()
@@ -77,8 +94,13 @@ public class PlayerAction : MonoBehaviour
         {
             Resume();
         }
+        
+        if (Lenten.action.WasPressedThisFrame())
+        {
+            LentenOnOff();
+        }
 
-        if (Interact.action.IsPressed())
+            if (Interact.action.IsPressed())
         {
             ToggleDialogue();
         }
@@ -312,5 +334,25 @@ public class PlayerAction : MonoBehaviour
                 Time.timeScale = 1f;
             }
     }
+
+    public void LentenOnOff()
+    {
+        foreach (ItemUpgrade upgrade in _playerdata.purchasedUpgrades)
+        {
+            if (upgrade.name == "Lenten")
+            {
+                _Lenten.SetActive(!_Lenten.activeSelf);
+
+                _uimanager.Lenten_Icon.gameObject.SetActive(_Lenten.activeSelf);
+
+                return;
+            }
+        }
+
+        _Lenten.SetActive(false);
+        _uimanager.Lenten_Icon.gameObject.SetActive(false);
+    }
+
+
 }
 

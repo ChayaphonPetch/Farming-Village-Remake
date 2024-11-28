@@ -18,6 +18,7 @@ public class Item : ScriptableObject {
     public bool stackable = true;
     public bool sellable = false;
     public int price;
+    public int DayGrown;
 
     [Header("both")]
     public Sprite image;

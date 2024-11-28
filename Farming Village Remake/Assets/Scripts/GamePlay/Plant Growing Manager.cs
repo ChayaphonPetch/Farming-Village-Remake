@@ -118,8 +118,9 @@ public class PlantGrowingManager : MonoBehaviour
         {
             Debug.Log("Plant harvested! Product: " + plantData.Product);
             AddProduct();
-            Destroy(gameObject);
+
             _tileManager.HandleRemovingTile();
+            Destroy(gameObject);
         }
     }
 

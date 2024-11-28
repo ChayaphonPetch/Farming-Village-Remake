@@ -9,6 +9,7 @@ public class BedManager : MonoBehaviour
     private TileManager _tilemanager;
     private PlayerData _playerdata;
     private UIManager _uimanager;
+    private int counts;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class BedManager : MonoBehaviour
         _tilemanager = FindObjectOfType<TileManager>();
         _playerdata = FindObjectOfType<PlayerData>();
         _uimanager = FindObjectOfType<UIManager>();
+
     }
 
     public void Sleep()
@@ -26,9 +28,15 @@ public class BedManager : MonoBehaviour
 
         int currentTotalMinutes = _WorldTimeManager.hours * 60 + _WorldTimeManager.minutes;
 
-            if (currentTotalMinutes <= limitNightMinutes && currentTotalMinutes >= limitMorningMinutes)
+        if (currentTotalMinutes <= limitNightMinutes && currentTotalMinutes >= limitMorningMinutes)
+        {
+            _WorldTimeManager.day++;
+
+            if (_WorldTimeManager.day > 31)
             {
-                _WorldTimeManager.day++;
+                _WorldTimeManager.day = 1;
+                _WorldTimeManager.ChangeSeason();
+            }
 
             PlantGrowingManager[] allPlantManagers = FindObjectsOfType<PlantGrowingManager>();
             foreach (var plantManager in allPlantManagers)
@@ -37,12 +45,13 @@ public class BedManager : MonoBehaviour
             }
 
             _SellStorageManager.SellItems();
-                _WorldTimeManager.ChangeWeather();
-                _tilemanager.ConvertAllWetSoiltoSoil();
-                _playerdata.current_stamina = (int)_uimanager.StaminaSlider.maxValue;
-            }
-        //_playerdata.current_stamina =;
+            _WorldTimeManager.ChangeWeather();
+            _tilemanager.ConvertAllWetSoiltoSoil();
+            _playerdata.current_stamina = (int)_uimanager.StaminaSlider.maxValue;
+        }
+
         _WorldTimeManager.hours = 6;
         _WorldTimeManager.minutes = 30;
     }
+
 }

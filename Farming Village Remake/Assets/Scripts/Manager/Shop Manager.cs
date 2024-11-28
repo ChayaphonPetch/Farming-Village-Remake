@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
@@ -9,14 +10,23 @@ public class ShopManager : MonoBehaviour
     public WorldTimeManager worldTimeManager;
 
     public GameObject shopslots;
+    public GameObject UpgradPage;
     public GameObject buyslot;
+    public GameObject upgradeslot;
+    public Image Merchant_Image;
+    public TextMeshProUGUI Merchant_Name;
 
     public Item[] itemseeds;
+    public ItemUpgrade[] upgradeitem;
+
+    private PlayerData playerdata;
 
 
     void Start()
     {
+        playerdata = FindObjectOfType<PlayerData>();
         SpawnBuySlots();
+        SpawnUpgradeSlots();
     }
 
     /*public void AddBuySlot(Item item)
@@ -60,5 +70,24 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public void SpawnUpgradeSlots()
+    {
+        foreach (Transform child in UpgradPage.transform)
+        {
+            Destroy(child.gameObject);
+        }
 
+        for (int i = 0; i < upgradeitem.Length; i++)
+        {
+            if (!playerdata.purchasedUpgrades.Contains(upgradeitem[i])) // Check if item is already purchased
+            {
+                GameObject newSlot = Instantiate(upgradeslot, UpgradPage.transform);
+                newSlot.transform.localScale = Vector3.one;
+
+                UpgradeSlot upgradeslotitem = newSlot.GetComponent<UpgradeSlot>();
+                upgradeslotitem.InitialiseItem(upgradeitem[i]);
+            }
+        }
+    }
 }
+

@@ -6,6 +6,9 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Other Sender")]
+    public string playtimer;
+
     [Header("Time Text")]
     public TextMeshProUGUI TimeText;
     public TextMeshProUGUI DayText;
@@ -17,8 +20,9 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI ShopCoinText;
 
     [Header("Sprite")]
-    public Image Season_Icon;
+    public Image Season_Icon, Lenten_Icon;
     public Sprite Season_Summer, Season_Winter;
+
 
     [Header("Stamina")]
     public Slider StaminaSlider;
@@ -29,6 +33,7 @@ public class UIManager : MonoBehaviour
 
     private WorldTimeManager worldtimeManager;
     private PlayerData playerData;
+    
 
     void Start()
     {
@@ -102,9 +107,20 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
     public void IncreaseMaxStamina(int increaseAmount)
     {
         StaminaSlider.maxValue += increaseAmount;
+    }
+
+    public void UpdatePlayTime(TextMeshProUGUI PlayTime)
+    {
+        if (PlayTime != null)
+        {
+            int hours = Mathf.FloorToInt(playerData.playtime / 3600);
+            int minutes = Mathf.FloorToInt((playerData.playtime % 3600) / 60);
+            int seconds = Mathf.FloorToInt(playerData.playtime % 60);
+
+            PlayTime.text = string.Format("Play Time : {0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+        }
     }
 }

@@ -12,6 +12,7 @@ public class PlayerData : MonoBehaviour//, IDataPersistence
     [Header("Player Statistics")]
     public int MoneyTotal;
     public float playtime;
+    public List<ItemUpgrade> purchasedUpgrades = new List<ItemUpgrade>();
 
     private int previous_money;
 

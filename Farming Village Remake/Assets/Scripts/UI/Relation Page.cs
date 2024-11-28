@@ -64,73 +64,29 @@ public class RelationPage : MonoBehaviour
         UpdateRelation(_npcdata.Old_Man_current_relationship, _npcdata.Old_Man_relationship, _npcdata.Old_Man_gift_receive, Old_ManRelation);
     }
 
-    private void UpdateRelation(int currentRelationship, int maxRelationship, int giftreceive, Image[] relations)
+    private void UpdateRelation(int currentRelationship, int maxRelationship, int giftReceive, Image[] relations)
     {
         maxRelationship = Mathf.Clamp(maxRelationship, 0, relations.Length);
         currentRelationship = Mathf.Clamp(currentRelationship, 0, maxRelationship);
 
-        switch (currentRelationship)
+        // Update hearts based on relationship level and gift received
+        for (int i = 0; i < relations.Length; i++)
         {
-            case 0:
-                if (giftreceive == 2)
-                {
-                    relations[0].sprite = HalfHeart;
-                }
-                break;
-
-            case 1:
-                if (giftreceive == 0)
-                {
-                    relations[0].sprite = FullHeart;
-                }
-                if (giftreceive == 2)
-                {
-                    relations[1].sprite = HalfHeart;
-                }
-                break;
-
-            case 2:
-                if (giftreceive == 0)
-                {
-                    relations[1].sprite = FullHeart;
-                }
-                if (giftreceive == 2)
-                {
-                    relations[2].sprite = HalfHeart;
-                }
-                break;
-
-            case 3:
-                if (giftreceive == 0)
-                {
-                    relations[2].sprite = FullHeart;
-                }
-                if (giftreceive == 2)
-                {
-                    relations[3].sprite = HalfHeart;
-                }
-                break;
-
-            case 4:
-                if (giftreceive == 0)
-                {
-                    relations[3].sprite = FullHeart;
-                }
-                if (giftreceive == 2)
-                {
-                    relations[4].sprite = HalfHeart;
-                }
-                break;
-
-            case 5:
-                relations[4].sprite = FullHeart;
-                break;
-
-            default:
-                Debug.LogWarning("Invalid relationship level provided: " + currentRelationship);
-                break;
+            if (i < currentRelationship)
+            {
+                relations[i].sprite = FullHeart; // Full heart for current relationship level
+            }
+            else if (i == currentRelationship && giftReceive == 2)
+            {
+                relations[i].sprite = HalfHeart; // Half heart if gift received and it's the next level
+            }
+            else
+            {
+                relations[i].sprite = EmptyHeart; // You may want an EmptyHeart sprite for unused hearts
+            }
         }
 
+        // Set active hearts up to the maximum relationship level
         for (int i = 0; i < relations.Length; i++)
         {
             relations[i].gameObject.SetActive(i < maxRelationship);

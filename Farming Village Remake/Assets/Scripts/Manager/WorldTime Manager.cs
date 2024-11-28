@@ -62,7 +62,6 @@ public class WorldTimeManager : MonoBehaviour
         {
             minutes = 0;
             hours++;
-
             if (hours >= 24)
             {
                 hours = 0;
@@ -89,10 +88,10 @@ public class WorldTimeManager : MonoBehaviour
         //Debug.Log($"Day: {day}, Hours: {hours}, Minutes: {minutes}");
     }
 
-    void ChangeSeason()
+    public void ChangeSeason()
     {
         Seasons = Seasons == "Summer" ? "Winter" : "Summer";
-        //Debug.Log($"Season changed to: {Seasons}");
+        //Debug.Log($"Season changed to: {Seasons}");   
     }
 
     public void ChangeWeather()

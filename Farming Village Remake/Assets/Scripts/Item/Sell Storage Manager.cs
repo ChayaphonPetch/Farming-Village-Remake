@@ -20,10 +20,10 @@ public class SellStorageManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        /*if (Input.GetKeyDown(KeyCode.C))
         {
             SellItems();
-        }
+        }*/
     }
     public void SellItems()
     {
