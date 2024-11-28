@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactername: ...
   characterSprite: {fileID: 0}
-  isRelationship: 1
+  isRelationship: 0
   dialogue:
   - Hi, Nice to meet you.
   - My Name is Umi Marin.

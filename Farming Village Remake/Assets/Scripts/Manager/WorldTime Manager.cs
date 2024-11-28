@@ -38,6 +38,7 @@ public class WorldTimeManager : MonoBehaviour
 
     void Start()
     {
+        _npcdata = FindObjectOfType<NPCData>();
         _shopmanager = FindObjectOfType<ShopManager>();
         _SellStorageManager = FindObjectOfType<SellStorageManager>();
         _tilemanager = FindObjectOfType<TileManager>();

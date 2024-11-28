@@ -17,7 +17,7 @@ public class NPCManager : MonoBehaviour
     private void Start()
     {
         _inventorymanager = FindObjectOfType<InventoryManager>();
-         
+        _data = FindObjectOfType<NPCData>();
         _dialogueActivator = FindObjectOfType<DialogueActivator>();
         _itemmanager = FindObjectOfType<ItemManager>();
         _dialogueUI = FindObjectOfType<DialogueUI>();
@@ -40,7 +40,7 @@ public class NPCManager : MonoBehaviour
         {
             _dialogueUI.CloseDialogueBox();
             return;
-        }
+        }   
 
     }
 

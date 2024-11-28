@@ -147,5 +147,53 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    /*public void LoadData(GameData gameData)
+    {
+        // Clear existing items in inventory
+        foreach (InventorySlot slot in inventorySlots)
+        {
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
+            {
+                Destroy(itemInSlot.gameObject);
+            }
+        }
 
+        // Load inventory items from GameData into their respective slots
+        foreach (InventoryItemData itemData in gameData.inventoryItems)
+        {
+            // Use the ItemDatabase to retrieve the Item by its name
+            Item itemToLoad = ItemDatabase.GetItemByName(itemData.itemName);
+            if (itemToLoad != null)
+            {
+                // Find the correct slot by index and spawn the item
+                int slotIndex = itemData.slotIndex; // Make sure this index is saved in InventoryItemData
+                if (slotIndex >= 0 && slotIndex < inventorySlots.Length)
+                {
+                    InventorySlot slot = inventorySlots[slotIndex];
+                    SpawnNewItem(itemToLoad, slot);
+                    InventoryItem loadedItem = slot.GetComponentInChildren<InventoryItem>();
+                    loadedItem.count = itemData.count;
+                    loadedItem.RefreshCount();
+                }
+            }
+        }
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        gameData.inventoryItems.Clear(); // Clear the saved items before updating
+
+        // Save current inventory items to GameData with their corresponding slot index
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            InventorySlot slot = inventorySlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
+            {
+                // Add the item with its index in the inventory
+                gameData.inventoryItems.Add(new InventoryItemData(itemInSlot.item.name, itemInSlot.count, i));
+            }
+        }
+    }*/
 }

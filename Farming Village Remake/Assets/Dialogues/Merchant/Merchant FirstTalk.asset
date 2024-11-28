@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactername: Old Man
   characterSprite: {fileID: 0}
-  isRelationship: 1
+  isRelationship: 0
   dialogue:
   - Hello Again!
   responses:

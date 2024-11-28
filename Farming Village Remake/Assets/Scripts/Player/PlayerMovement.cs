@@ -121,4 +121,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerPosition;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerPosition = this.transform.position;
+    }
+
 }

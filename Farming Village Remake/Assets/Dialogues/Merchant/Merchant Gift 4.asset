@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactername: Old Man
   characterSprite: {fileID: 0}
-  isRelationship: 1
+  isRelationship: 0
   dialogue:
   - "Next time I get something new, you\u2019ll be the first person I think of, I
     promise!"

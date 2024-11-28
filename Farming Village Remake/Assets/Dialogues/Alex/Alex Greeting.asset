@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactername: ...
   characterSprite: {fileID: 0}
-  isRelationship: 1
+  isRelationship: 0
   dialogue:
   - 'Hey, Are you new here?
 

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class CharacterCreate : MonoBehaviour//, IDataPersistence
+public class CharacterCreate : MonoBehaviour, IDataPersistence
 {
     public Button CreateButton;
 
     public TMP_InputField NameInput;
 
     private PlayerData playerData;
+
+    private string playerName;
 
     private void Awake()
     {
@@ -18,6 +20,11 @@ public class CharacterCreate : MonoBehaviour//, IDataPersistence
         {
             Debug.LogError("PlayerData instance not found in the scene! Make sure there is a GameObject with the PlayerData script attached.");
         }
+    }
+
+    private void Start()
+    {
+        CreateButton.onClick.AddListener(CreateCharacter);
     }
 
     public void CreateCharacter()
@@ -38,14 +45,14 @@ public class CharacterCreate : MonoBehaviour//, IDataPersistence
         // DataPersistenceManager.Instance.SaveGame();
     }
 
-    /*public void LoadData(GameData data)
+    public void LoadData(GameData data)
     {
-        this.Name = data._Name;
-        NameInput.text = this.Name;
+        this.playerName = data._Name;
+        NameInput.text = this.playerName;
     }
 
     public void SaveData(ref GameData data)
     {
-        data._Name = this.Name;
-    }*/
+        data._Name = this.playerName;
+    }
 }
